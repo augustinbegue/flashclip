@@ -14,11 +14,13 @@
     "hono": "^4.10.7",
     "zod": "^4.1.13",
     "@hono/zod-validator": "^0.7.5",
-    "@prisma/client": "latest"
+    "@prisma/client": "latest",
+    "mime-types": "latest"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "typescript": "^5.0.0",
-    "prisma": "latest"
+    "prisma": "latest",
+    "@types/mime-types": "latest"
   }
 }
