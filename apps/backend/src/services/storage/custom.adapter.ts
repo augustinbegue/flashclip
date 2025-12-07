@@ -9,113 +9,145 @@ import type { FileMetadata, UploadOptions } from '../storage.service';
 
 export class CustomAdapter {
   private baseUrl: string;
-  private authToken?: string;
+  private password?: string;
+  private useQueryAuth: boolean;
 
   constructor() {
-    this.baseUrl = process.env.FILE_SERVER_URL || 'https://files.server.begue.cc/flashclip';
-      }
+    this.baseUrl = (process.env.FILE_SERVER_URL || 'https://files.server.begue.cc/flashclip').replace(/\/+$/, '');
+    this.password =
+      process.env.FILE_SERVER_PASSWORD ||
+      process.env.FILE_SERVER_PW ||
+      process.env.FILE_SERVER_TOKEN ||
+      '';
+    this.useQueryAuth = true;
+  }
 
   /**
-   * Upload a file to your custom server
-   * TODO: Implement according to your API specification
+   * Upload a file using the server's PUT API (binary body, optional JSON response via `want=json`).
    */
   async upload(
     file: File | Blob,
     path: string,
     options?: UploadOptions
   ): Promise<FileMetadata> {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('path', path);
-    if (options?.metadata) {
-      formData.append('metadata', JSON.stringify(options.metadata));
+    void options;
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const uploadUrl = this.buildUrl(path, { want: 'json' });
+
+    const response = await fetch(uploadUrl.toString(), {
+      method: 'PUT',
+      headers: this.getAuthHeaders({
+        'Content-Type': (file as any).type || 'application/octet-stream',
+        Accept: 'application/json',
+      }),
+      body: buffer,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => response.statusText);
+      throw new Error(`Upload failed (${response.status}): ${errorText}`);
     }
 
-    try {
-      const response = await fetch(`${this.baseUrl}/upload`, {
-        method: 'POST',
-        headers: this.getHeaders(),
-        body: formData,
-      });
+    const payload = await this.parseJsonSafe(response);
+    const mimeType = (file as any).type || payload?.mimeType || payload?.mime || 'application/octet-stream';
+    const uploadedAt = payload?.uploadedAt ? new Date(payload.uploadedAt) : new Date();
 
-      if (!response.ok) {
-        throw new Error(`Upload failed: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      
-      // TODO: Map your API response to FileMetadata
-      return {
-        path: result.path || path,
-        url: result.url || `${this.baseUrl}/files/${path}`,
-        size: (file as any).size || 0,
-        mimeType: (file as any).type || 'application/octet-stream',
-        uploadedAt: new Date(result.uploadedAt || new Date()),
-      };
-    } catch (error) {
-      console.error('Custom server upload failed:', error);
-      throw new Error(`Failed to upload file: ${(error as Error).message}`);
-    }
+    return {
+      path: payload?.path || path,
+      url: payload?.url || this.buildUrl(path).toString(),
+      size: (file as any).size ?? buffer.byteLength,
+      mimeType,
+      uploadedAt,
+    };
   }
 
   /**
-   * Download a file from your custom server
-   * TODO: Implement according to your API
+   * Download a file via `GET ?dl` to avoid inline rendering.
    */
   async download(path: string): Promise<Buffer> {
-    try {
-      const response = await fetch(`${this.baseUrl}/download/${path}`, {
-        headers: this.getHeaders(),
-      });
+    const url = this.buildUrl(path, { dl: '' });
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      headers: this.getAuthHeaders(),
+    });
 
-      if (!response.ok) {
-        throw new Error(`Download failed: ${response.statusText}`);
-      }
-
-      return Buffer.from(await response.arrayBuffer());
-    } catch (error) {
-      console.error('Custom server download failed:', error);
-      throw new Error(`Failed to download file: ${(error as Error).message}`);
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => response.statusText);
+      throw new Error(`Download failed (${response.status}): ${errorText}`);
     }
+
+    return Buffer.from(await response.arrayBuffer());
   }
 
   /**
-   * Delete a file from your custom server
-   * TODO: Implement according to your API
+   * Delete a file/folder using the `POST ?delete` endpoint.
    */
   async delete(path: string): Promise<void> {
-    try {
-      const response = await fetch(`${this.baseUrl}/delete/${path}`, {
-        method: 'DELETE',
-        headers: this.getHeaders(),
-      });
+    const url = this.buildUrl(path, { delete: '' });
+    const response = await fetch(url.toString(), {
+      method: 'POST',
+      headers: this.getAuthHeaders(),
+    });
 
-      if (!response.ok) {
-        throw new Error(`Delete failed: ${response.statusText}`);
-      }
-    } catch (error) {
-      console.error('Custom server delete failed:', error);
-      throw new Error(`Failed to delete file: ${(error as Error).message}`);
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => response.statusText);
+      throw new Error(`Delete failed (${response.status}): ${errorText}`);
     }
   }
 
   /**
-   * Get public URL for a file
-   * TODO: Implement according to your API
+   * Return a direct URL; includes `pw` when configured for query auth.
    */
   async getUrl(path: string): Promise<string> {
-    return `${this.baseUrl}/files/${path}`;
+    return this.buildUrl(path).toString();
   }
 
-  private getHeaders(): Record<string, string> {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
+  private buildUrl(path: string, params?: Record<string, string | number | boolean | undefined>): URL {
+    const cleanPath = path.replace(/^\/+/, '');
+    const base = this.baseUrl.endsWith('/') ? this.baseUrl : `${this.baseUrl}/`;
+    const url = new URL(cleanPath, base);
 
-    if (this.authToken) {
-      headers['Authorization'] = `Bearer ${this.authToken}`;
+    if (params) {
+      for (const [key, value] of Object.entries(params)) {
+        if (value === undefined || value === false) continue;
+        if (value === true || value === '') {
+          url.searchParams.set(key, '');
+        } else {
+          url.searchParams.set(key, String(value));
+        }
+      }
+    }
+
+    if (this.useQueryAuth && this.password) {
+      url.searchParams.set('pw', this.password);
+    }
+
+    return url;
+  }
+
+  private getAuthHeaders(additional?: Record<string, string>): Record<string, string> {
+    const headers: Record<string, string> = { ...(additional || {}) };
+
+    if (this.password) {
+      headers['Cookie'] = `cppwd=${this.password}`;
     }
 
     return headers;
+  }
+
+  private async parseJsonSafe(response: Response): Promise<any | undefined> {
+    const contentType = response.headers.get('content-type') || '';
+
+    if (contentType.includes('application/json') || contentType.includes('text/json')) {
+      return response.json();
+    }
+
+    const text = await response.text().catch(() => undefined);
+    try {
+      return text ? JSON.parse(text) : undefined;
+    } catch (error) {
+      console.warn('Upload response was not JSON:', error);
+      return undefined;
+    }
   }
 }

@@ -15,20 +15,21 @@ generator client {
 // ========== MODELS ==========
 model Video {
   id String @id @default(uuid())
-
-  title       String
+  
+  title String
   description String
-  url         String
-  duration    Int
-  userId      String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  jobs        AIJob[]
+  url String
+  duration Int
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+
 }
 
 model AIJob {
   id String @id @default(uuid())
-
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -36,4 +37,6 @@ model AIJob {
   video Video @relation(fields: [videoId], references: [id])
 
   videoId String
+
 }
+
