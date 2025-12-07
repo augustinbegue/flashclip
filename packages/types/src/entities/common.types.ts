@@ -19,3 +19,19 @@ export interface StorageInfo {
   createdAt: Date | string;
   updatedAt: Date | string;
 }
+
+export interface AIResult {
+  id: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+export interface SubtitleRequest {}
+
+export interface ProcessingTime {
+  id: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+export interface ExportRequest {}

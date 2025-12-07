@@ -20,6 +20,7 @@ model Video {
   description String
   url String
   duration Int
+  userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -32,6 +33,10 @@ model AIJob {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Relations from object refs (this model is the "one" side or direct reference)
+  video Video @relation(fields: [videoId], references: [id])
+
+  videoId String
 
 }
 
