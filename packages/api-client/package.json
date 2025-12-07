@@ -1,6 +1,6 @@
 {
   "name": "@repo/api-client",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Auto-generated API client with type safety",
   "main": "src/main.ts",
   "types": "src/main.ts",
