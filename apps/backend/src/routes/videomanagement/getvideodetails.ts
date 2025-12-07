@@ -11,6 +11,9 @@ const controller = new VideoManagementController();
 // ============================================================================
 
 // --- GET /videomanagement/getvideodetails ---
+const getQuerySchema = z.object({
+  videoId: z.string(),
+});
 
 // ============================================================================
 // Route Handlers
@@ -18,12 +21,17 @@ const controller = new VideoManagementController();
 
 router.get(
   '/',
+  zValidator('query', getQuerySchema),
   async (c) => {
     try {
 
+      // Extract validated query parameters
+      const { videoId } = c.req.valid('query');
 
       // Call controller method
-      const result = await controller.getVideoDetails();
+      const result = await controller.getVideoDetails({
+        videoId,
+      });
 
       // Return response
       return c.json(result);

@@ -12,7 +12,7 @@ export class VideomanagementEndpoints {
    * GET /videomanagement/listvideos   */
   async listVideos(): Promise<any> {
     return this.client.get(`/videomanagement/listvideos`);  }
-                                                                              
+                                                                                                                                          
   /**
    * GET /videomanagement/filtervideos   */
   async filterVideos(): Promise<any> {

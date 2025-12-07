@@ -15,7 +15,7 @@ export class VideoManagementController {
 
   /**
    * listVideos   */
-  async listVideos(): Promise<Video> {
+  async listVideos(): Promise<{ data: Video[]; pagination: { total: number; page: number; limit: number; totalPages: number; } }> {
     try {
       // TODO: Implement listVideos      // This method should:
       // 1. Validate input parameters
@@ -31,7 +31,9 @@ export class VideoManagementController {
 
   /**
    * filterVideos   */
-  async filterVideos(): Promise<Video> {
+  async filterVideos(params: {
+        query?: string | undefined;
+      }): Promise<{ data: Video[]; pagination: { total: number; page: number; limit: number; totalPages: number; } }> {
     try {
       // TODO: Implement filterVideos      // This method should:
       // 1. Validate input parameters
