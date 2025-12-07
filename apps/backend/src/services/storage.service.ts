@@ -22,6 +22,33 @@ export interface FileMetadata {
   uploadedAt: Date;
 }
 
+export interface DirectoryEntry {
+  href: string;
+  sz?: number;
+  ext?: string;
+  ts?: number;
+  lead?: string;
+}
+
+export interface FileEntry {
+  href: string;
+  sz?: number;
+  ext?: string;
+  ts?: number;
+  mime?: string;
+  lead?: string;
+}
+
+export interface ListResponse {
+  dirs: DirectoryEntry[];
+  files: FileEntry[];
+  [key: string]: unknown;
+}
+
+export interface ListOptions {
+  includeDots?: boolean;
+}
+
 export class StorageService {
   private static instance: StorageService;
   private adapter: CustomAdapter;
@@ -79,6 +106,14 @@ export class StorageService {
    */
   async getUrl(path: string): Promise<string> {
     return this.adapter.getUrl(path);
+  }
+
+  /**
+   * List files and folders at a path (custom provider only)
+   */
+  async list(path: string, options?: ListOptions): Promise<ListResponse> {
+    // Adapter may throw when unsupported (e.g., S3)
+    return (this.adapter as any).list(path, options);
   }
 
   /**
