@@ -44,3 +44,6 @@ coverage/
 
 # Turbo
 .turbo/
+
+# Prisma
+generated
