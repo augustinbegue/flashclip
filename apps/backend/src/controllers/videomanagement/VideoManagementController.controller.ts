@@ -45,4 +45,40 @@ export class VideoManagementController {
     }
   }
 
+  /**
+   * getVideoDetails   */
+  async getVideoDetails(params: {
+        videoId?: string;
+      }): Promise<Video> {
+    try {
+      // TODO: Implement getVideoDetails      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
+    } catch (error) {
+      console.error('Error in getVideoDetails:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * getAIResults   */
+  async getAIResults(params: {
+        videoId?: string;
+      }): Promise<Video> {
+    try {
+      // TODO: Implement getAIResults      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
+    } catch (error) {
+      console.error('Error in getAIResults:', error);
+      throw error;
+    }
+  }
+
 }
