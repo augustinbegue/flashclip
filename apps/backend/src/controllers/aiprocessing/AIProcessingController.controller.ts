@@ -15,7 +15,9 @@ export class AIProcessingController {
 
   /**
    * createAIJob   */
-  async createAIJob(): Promise<AIJob> {
+  async createAIJob(params: {
+        videoId?: string;
+      }): Promise<AIJob> {
     try {
       // TODO: Implement createAIJob      // This method should:
       // 1. Validate input parameters
@@ -79,7 +81,9 @@ export class AIProcessingController {
 
   /**
    * getAIJob   */
-  async getAIJob(): Promise<AIJob> {
+  async getAIJob(params: {
+        jobId?: string;
+      }): Promise<AIJob> {
     try {
       // TODO: Implement getAIJob      // This method should:
       // 1. Validate input parameters
@@ -95,7 +99,9 @@ export class AIProcessingController {
 
   /**
    * listAIJobsByVideo   */
-  async listAIJobsByVideo(): Promise<AIJob> {
+  async listAIJobsByVideo(params: {
+        videoId?: string;
+      }): Promise<AIJob> {
     try {
       // TODO: Implement listAIJobsByVideo      // This method should:
       // 1. Validate input parameters

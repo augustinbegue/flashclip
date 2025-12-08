@@ -11,6 +11,9 @@ const controller = new AIProcessingController();
 // ============================================================================
 
 // --- GET /aiprocessing/createaijob ---
+const getQuerySchema = z.object({
+  videoId: z.string(),
+});
 
 // ============================================================================
 // Route Handlers
@@ -18,12 +21,17 @@ const controller = new AIProcessingController();
 
 router.get(
   '/',
+  zValidator('query', getQuerySchema),
   async (c) => {
     try {
 
+      // Extract validated query parameters
+      const { videoId } = c.req.valid('query');
 
       // Call controller method
-      const result = await controller.createAIJob();
+      const result = await controller.createAIJob({
+        videoId,
+      });
 
       // Return response
       return c.json(result);
