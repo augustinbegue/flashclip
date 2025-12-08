@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
   "cliVersion": "1.0.0",
-  "specHash": "afbf043bdf4e39e064bff9265c3a555f76b6769a6b43abe031bb25de26828e51",
+  "specHash": "86a7210bdb1bcd66d99cc7af453ddc955b00363cec880b5c6d5f22f580badde2",
   "specSnapshot": {
     "$schema": "https://files.server.begue.cc/share/agl/spec.schema.json",
     "project": {
       "name": "Flashclip",
-      "version": "1.2.2",
+      "version": "1.2.3",
       "description": "",
       "targets": [
         {
@@ -815,656 +815,662 @@
       "path": "packages/types/src/entities/media.types.ts",
       "hash": "bc80bba24ff3af7ba40b084ba4590d79b3cda6c53189b20597dbc348d134aed6",
       "generator": "types-generator",
-      "timestamp": 1765134255923
+      "timestamp": 1765202581156
     },
     "packages/types/src/entities/jobs.types.ts": {
       "path": "packages/types/src/entities/jobs.types.ts",
       "hash": "5a96d4e47d79910658847d9364f284022588d342335901cbdfb9f2ac4b8ac1ea",
       "generator": "types-generator",
-      "timestamp": 1765134255925
+      "timestamp": 1765202581158
     },
     "packages/types/src/entities/common.types.ts": {
       "path": "packages/types/src/entities/common.types.ts",
       "hash": "08d1f602ed0c0712152ad84b6444fdd22ba22219dd9f198d073674b82acb6c86",
       "generator": "types-generator",
-      "timestamp": 1765134255927
+      "timestamp": 1765202581160
     },
     "packages/types/src/entities/hardware.types.ts": {
       "path": "packages/types/src/entities/hardware.types.ts",
       "hash": "2ea145574d42699a626d40c0088f768c070a47f542d448a6d1bcd6e4645d5a5b",
       "generator": "types-generator",
-      "timestamp": 1765134255928
+      "timestamp": 1765202581161
     },
     "packages/types/src/api/common.types.ts": {
       "path": "packages/types/src/api/common.types.ts",
       "hash": "645c88e950484514b6670d7244ab71ff86bb0f78c34be76f4ed2a1dfa7c42995",
       "generator": "types-generator",
-      "timestamp": 1765134255930
+      "timestamp": 1765202581164
     },
     "packages/types/src/index.ts": {
       "path": "packages/types/src/index.ts",
       "hash": "5a1a17c8094e37010c17f28fc67b32b7b40a544c536a44d32be8ecd0832b6764",
       "generator": "types-generator",
-      "timestamp": 1765134255932
+      "timestamp": 1765202581165
     },
     "packages/types/package.json": {
       "path": "packages/types/package.json",
-      "hash": "a9a56ec83ff62bbfc13fefb4872c452fd8dda215c5b32062bba102ee973b02c3",
+      "hash": "177e9839ba546007e49e3d757427625084c02ba4551adef7d52569eddb14e28d",
       "generator": "types-generator",
-      "timestamp": 1765134255932
+      "timestamp": 1765202581165
     },
     "packages/types/tsconfig.json": {
       "path": "packages/types/tsconfig.json",
       "hash": "210677e22695b226504fbfaedfdd510f4e0383c97c1a4e1a93975319f987361b",
       "generator": "types-generator",
-      "timestamp": 1765134255935
+      "timestamp": 1765202581166
     },
     "packages/types/README.md": {
       "path": "packages/types/README.md",
       "hash": "92c90d8341f731f2d105c5f4bbbbdd96cbfeafac4cc69664c5747f39c2218348",
       "generator": "types-generator",
-      "timestamp": 1765134255935
+      "timestamp": 1765202581166
     },
     "packages/api-client/package.json": {
       "path": "packages/api-client/package.json",
-      "hash": "e09ddaa44ed0738ff0883383be6468e5d73cb09da9aa1d6a85c61c6f013a2d7f",
+      "hash": "f1994b637ab0953f14670983a47cb9a3ed74eb23c0c974c192080fe6156fff5b",
       "generator": "api-client-generator",
-      "timestamp": 1765134255935
+      "timestamp": 1765202581167
     },
     "packages/api-client/tsconfig.json": {
       "path": "packages/api-client/tsconfig.json",
       "hash": "7d75043b12c1e2930a3e94574154ba02bae4a646623274710f8b5f279f78a228",
       "generator": "api-client-generator",
-      "timestamp": 1765134255936
+      "timestamp": 1765202581167
     },
     "packages/api-client/src/client.ts": {
       "path": "packages/api-client/src/client.ts",
       "hash": "ed7548d8124990a6fdafa88f51af96320f2dcb12c2e03e8f919e119bcf4403fc",
       "generator": "api-client-generator",
-      "timestamp": 1765134255936
+      "timestamp": 1765202581168
     },
     "packages/api-client/src/config.ts": {
       "path": "packages/api-client/src/config.ts",
       "hash": "1b38dc5ddef0352613f3c45354c4877dff0e1f9c118e1ba273232a61caa0e3f8",
       "generator": "api-client-generator",
-      "timestamp": 1765134255936
+      "timestamp": 1765202581168
     },
     "packages/api-client/src/endpoints/videomanagement.endpoints.ts": {
       "path": "packages/api-client/src/endpoints/videomanagement.endpoints.ts",
       "hash": "e21cf2f06d774485e8ee6b9d77f83c36da5bd6e7c13dddf3477e0c522ab3f4fe",
       "generator": "api-client-generator",
-      "timestamp": 1765134255937
+      "timestamp": 1765202581169
     },
     "packages/api-client/src/endpoints/aiprocessing.endpoints.ts": {
       "path": "packages/api-client/src/endpoints/aiprocessing.endpoints.ts",
       "hash": "604594a6f6a0bc2a702a5d96da6e100f6ff4eea22304b18cdb79f94f56d8d444",
       "generator": "api-client-generator",
-      "timestamp": 1765134255937
+      "timestamp": 1765202581169
     },
     "packages/api-client/src/endpoints/statistics.endpoints.ts": {
       "path": "packages/api-client/src/endpoints/statistics.endpoints.ts",
       "hash": "513a60780ebdfca85768fa7f88d25349602152c8dafa0a4ca82bc0635a1a9d12",
       "generator": "api-client-generator",
-      "timestamp": 1765134255937
+      "timestamp": 1765202581169
     },
     "packages/api-client/src/endpoints/iotmonitoring.endpoints.ts": {
       "path": "packages/api-client/src/endpoints/iotmonitoring.endpoints.ts",
       "hash": "13c24700725efc0e2322157c26d5be5498d9da9d59290f9a2b7a3aaecfb27f35",
       "generator": "api-client-generator",
-      "timestamp": 1765134255937
+      "timestamp": 1765202581169
     },
     "packages/api-client/src/index.ts": {
       "path": "packages/api-client/src/index.ts",
       "hash": "031a580a1118ac38b7ba98f86072692c9d2722867fdae109853a91627fafd4cf",
       "generator": "api-client-generator",
-      "timestamp": 1765134255937
+      "timestamp": 1765202581170
     },
     "packages/api-client/src/main.ts": {
       "path": "packages/api-client/src/main.ts",
       "hash": "d1c8e91c2da74125a927d0d145eb47adcbda24aeaef874c3694cd96cfac10716",
       "generator": "api-client-generator",
-      "timestamp": 1765134255937
+      "timestamp": 1765202581170
     },
     "apps/mobile/src/shared/components/ui/Button.tsx": {
       "path": "apps/mobile/src/shared/components/ui/Button.tsx",
       "hash": "da6e8d6195db823c7b063c7fefd96ab75633ab9420beb86e52f855cb143f1cdb",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581171
     },
     "apps/mobile/src/shared/components/ui/Card.tsx": {
       "path": "apps/mobile/src/shared/components/ui/Card.tsx",
       "hash": "68145e1ce1f491d057e8c52d8751b774d07174229325e7fa7cc1ce1d0ce8fe67",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581171
     },
     "apps/mobile/src/shared/components/ui/Input.tsx": {
       "path": "apps/mobile/src/shared/components/ui/Input.tsx",
       "hash": "48738270a74143f2dc54d01626da62d8887031b8f1108a3fc702c1179571b2cd",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581172
     },
     "apps/mobile/src/shared/components/ui/Text.tsx": {
       "path": "apps/mobile/src/shared/components/ui/Text.tsx",
       "hash": "159c661c3855dc702d66047f8ca7d0589a84c833d0bf317e97ed4134d67d6d77",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581172
     },
     "apps/mobile/src/shared/components/layout/Header.tsx": {
       "path": "apps/mobile/src/shared/components/layout/Header.tsx",
       "hash": "5233fa8e5d3de0e9765d5cbca0f8d25e6aac8ab4a1dbdd923db62d8aec00a660",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581172
     },
     "apps/mobile/src/shared/components/layout/Screen.tsx": {
       "path": "apps/mobile/src/shared/components/layout/Screen.tsx",
       "hash": "60cc7a06c03f392e68c77582c0e60940a19343d32d16ade4c8cd5e393d8b1e46",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581172
     },
     "apps/mobile/src/shared/components/layout/EmptyState.tsx": {
       "path": "apps/mobile/src/shared/components/layout/EmptyState.tsx",
       "hash": "1590d98e97ab2e228308defafed1a35c787d419dee9663156a10cb5fdee00459",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581173
     },
     "apps/mobile/src/shared/components/feedback/Loading.tsx": {
       "path": "apps/mobile/src/shared/components/feedback/Loading.tsx",
       "hash": "596df79cd4f23b064598d9b110d46e2314f553d366a9ba1fc1e391e563de34c7",
       "generator": "shared-components",
-      "timestamp": 1765134255938
+      "timestamp": 1765202581173
     },
     "apps/mobile/src/core/config/app.config.ts": {
       "path": "apps/mobile/src/core/config/app.config.ts",
       "hash": "2032bc2fd3ce6c7cb40f99ad3d04b553df6b342a19f21fbe33d4dd733c0c14d1",
       "generator": "core-config",
-      "timestamp": 1765134255939
+      "timestamp": 1765202581175
     },
     "apps/mobile/src/core/config/api.config.ts": {
       "path": "apps/mobile/src/core/config/api.config.ts",
       "hash": "4ca43926580a9076518d72a01eccca7a118c3c92be9839f5bd9221f9e11a063b",
       "generator": "core-config",
-      "timestamp": 1765134255939
+      "timestamp": 1765202581176
     },
     "apps/mobile/src/core/config/theme.config.ts": {
       "path": "apps/mobile/src/core/config/theme.config.ts",
       "hash": "139f9de905a95513f0d6f0c902f3d5e0383bf37381bef17f6aa707e6ef8eb55d",
       "generator": "core-config",
-      "timestamp": 1765134255939
+      "timestamp": 1765202581176
     },
     "apps/mobile/app/_layout.tsx": {
       "path": "apps/mobile/app/_layout.tsx",
       "hash": "8c1edf14482513667a460a95ff9847eb84d3327aa43e39feec9de2964dfc8dae",
       "generator": "app-router",
-      "timestamp": 1765134255939
+      "timestamp": 1765202581176
     },
     "apps/mobile/app/index.tsx": {
       "path": "apps/mobile/app/index.tsx",
       "hash": "9f174a35eebe3d774377326e964623fa49139aa128257b74db76a1b0660f84d2",
       "generator": "app-router",
-      "timestamp": 1765134255939
+      "timestamp": 1765202581177
     },
     "apps/mobile/app/+not-found.tsx": {
       "path": "apps/mobile/app/+not-found.tsx",
       "hash": "630b858f92c48e2b268b9a1d56e2944b0230344644b0470baa4d4c928629766b",
       "generator": "app-router",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581177
     },
     "apps/mobile/global.css": {
       "path": "apps/mobile/global.css",
       "hash": "186419c47e46d1688974fe6d1d4688d7234f1790113a0c1e933526b522c9a04c",
       "generator": "app-router",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581177
     },
     "apps/mobile/app/(tabs)/videomanagement.tsx": {
       "path": "apps/mobile/app/(tabs)/videomanagement.tsx",
       "hash": "fdfc30344cfa1814b136badc18a97629104ee5687e6765433bcedd761c6425b7",
       "generator": "expo-screens",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581177
     },
     "apps/mobile/app/(tabs)/videomanagement/[id].tsx": {
       "path": "apps/mobile/app/(tabs)/videomanagement/[id].tsx",
       "hash": "d3f89e7aec484e0e389fc2323329a17fabee8310d0a14ceb80d20d5212d912d4",
       "generator": "expo-screens",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581177
     },
     "apps/mobile/app/(tabs)/aiprocessing.tsx": {
       "path": "apps/mobile/app/(tabs)/aiprocessing.tsx",
       "hash": "570e60468c28063e9d86bc7761e3d5e26815d8d6e0f84aac2b2374c250cada58",
       "generator": "expo-screens",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581178
     },
     "apps/mobile/app/(tabs)/aiprocessing/create.tsx": {
       "path": "apps/mobile/app/(tabs)/aiprocessing/create.tsx",
       "hash": "692693f2bde6409f3c54763cc865e4c23110985c9830aa4ca8896d403b4edc8a",
       "generator": "expo-screens",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581178
     },
     "apps/mobile/app/(tabs)/statistics.tsx": {
       "path": "apps/mobile/app/(tabs)/statistics.tsx",
       "hash": "aa139cc58bc0f05a811b423a73b08d05627f03bdf3db820a0b265ccd2bdea9ea",
       "generator": "expo-screens",
-      "timestamp": 1765134255940
+      "timestamp": 1765202581178
     },
     "apps/mobile/app/(tabs)/statistics/create.tsx": {
       "path": "apps/mobile/app/(tabs)/statistics/create.tsx",
       "hash": "a65ab6981511250aa416f157a7b187894207c3f9fffadac6891128f54bcdf211",
       "generator": "expo-screens",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581178
     },
     "apps/mobile/app/(tabs)/iotmonitoring.tsx": {
       "path": "apps/mobile/app/(tabs)/iotmonitoring.tsx",
       "hash": "a85aab39db7a6e08caaf664d44f1fef3f0569034902e02de2a35b63d06f86544",
       "generator": "expo-screens",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581178
     },
     "apps/mobile/src/features/videomanagement/types/videomanagement.types.ts": {
       "path": "apps/mobile/src/features/videomanagement/types/videomanagement.types.ts",
       "hash": "ae00edc7dffc0fe85b70c07840041a764b621161cf7df9deaf4f1284113f14c4",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581179
     },
     "apps/mobile/src/features/videomanagement/controllers/videomanagement.controller.ts": {
       "path": "apps/mobile/src/features/videomanagement/controllers/videomanagement.controller.ts",
       "hash": "c039e35c8f5c1122ede1e150dd99e2404f519456389d15c2e440dc3bed156ba8",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581179
     },
     "apps/mobile/src/features/videomanagement/screens/VideoManagementScreen.screen.tsx": {
       "path": "apps/mobile/src/features/videomanagement/screens/VideoManagementScreen.screen.tsx",
       "hash": "de60f622497304dd7a7d6b943071ee4a5d5870aae3de889e41ba9d31e056021b",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581179
     },
     "apps/mobile/src/features/videomanagement/screens/VideoManagementDetailScreen.screen.tsx": {
       "path": "apps/mobile/src/features/videomanagement/screens/VideoManagementDetailScreen.screen.tsx",
       "hash": "fd56d12a96136257d26c0ebaf050f2913e9eb513772d42ccea92c89afa5166b6",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581179
     },
     "apps/mobile/src/features/videomanagement/index.ts": {
       "path": "apps/mobile/src/features/videomanagement/index.ts",
       "hash": "6e0692df1da1b0449b4646701ccc2bc5faa59d3e69ce1b3d6a738f2616813e87",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/aiprocessing/types/aiprocessing.types.ts": {
       "path": "apps/mobile/src/features/aiprocessing/types/aiprocessing.types.ts",
       "hash": "89a31e689f5cd7d98c0cdb28dd3a300e33f3569d67a53deb8527f29d0259fb45",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/aiprocessing/controllers/aiprocessing.controller.ts": {
       "path": "apps/mobile/src/features/aiprocessing/controllers/aiprocessing.controller.ts",
       "hash": "f435257f81449349bb7c4745e38e7c6b0100926c158683836c592170dcef5c7d",
       "generator": "features",
-      "timestamp": 1765134255941
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/aiprocessing/screens/AIProcessingScreen.screen.tsx": {
       "path": "apps/mobile/src/features/aiprocessing/screens/AIProcessingScreen.screen.tsx",
       "hash": "dcb910ba6cf1e63332a13fac50bedafcb04b144cdc4d9928e806ab4e77a9e769",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/aiprocessing/screens/AIProcessingCreateScreen.screen.tsx": {
       "path": "apps/mobile/src/features/aiprocessing/screens/AIProcessingCreateScreen.screen.tsx",
       "hash": "c75ae8de7ddaf30935975c8c97872b7cfc861b3ff723034b1a80f0672d5e81bc",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/aiprocessing/index.ts": {
       "path": "apps/mobile/src/features/aiprocessing/index.ts",
       "hash": "4ee01b14e2d910617b666cf4a02bd632e9b22cde685382453dd743ae3840378f",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/statistics/types/statistics.types.ts": {
       "path": "apps/mobile/src/features/statistics/types/statistics.types.ts",
       "hash": "adf615e8f2c32dbb7445f4718fab38cec83c6e03c8280bef3f09cf54b462e7bd",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/statistics/controllers/statistics.controller.ts": {
       "path": "apps/mobile/src/features/statistics/controllers/statistics.controller.ts",
       "hash": "9a53ece644b9a1bf659112c122ec0d9273a0b3bd8b71a8f5518dba7631128826",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/statistics/screens/StatisticsScreen.screen.tsx": {
       "path": "apps/mobile/src/features/statistics/screens/StatisticsScreen.screen.tsx",
       "hash": "6f5b4b1fcc14990263745fe55c95d49be1edda258154b99d9b086cc7bab672e7",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581180
     },
     "apps/mobile/src/features/statistics/screens/StatisticsCreateScreen.screen.tsx": {
       "path": "apps/mobile/src/features/statistics/screens/StatisticsCreateScreen.screen.tsx",
       "hash": "245d1efa3cf039ad223fa8f6c65eaca5ba0a7bb5bddcfe4be5e5f449b9ef2481",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581181
     },
     "apps/mobile/src/features/statistics/index.ts": {
       "path": "apps/mobile/src/features/statistics/index.ts",
       "hash": "de74c0c24f58aa2afe094a388d598a7d44216e9718de8be586aa08caffda9cfa",
       "generator": "features",
-      "timestamp": 1765134255942
+      "timestamp": 1765202581181
     },
     "apps/mobile/src/features/iotmonitoring/types/iotmonitoring.types.ts": {
       "path": "apps/mobile/src/features/iotmonitoring/types/iotmonitoring.types.ts",
       "hash": "7fda5b07a2f03036317ecf32a4a6c2a1604766b0e34c90a02c675d7c6c975d48",
       "generator": "features",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581181
     },
     "apps/mobile/src/features/iotmonitoring/controllers/iotmonitoring.controller.ts": {
       "path": "apps/mobile/src/features/iotmonitoring/controllers/iotmonitoring.controller.ts",
       "hash": "d969c2062499d5c740d546c51cc0fead63d9dd9268a886deb6506623696a7720",
       "generator": "features",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581181
     },
     "apps/mobile/src/features/iotmonitoring/screens/IoTMonitoringScreen.screen.tsx": {
       "path": "apps/mobile/src/features/iotmonitoring/screens/IoTMonitoringScreen.screen.tsx",
       "hash": "18e46f90a12ffa4b47ab3263e262f653ce276b4b74663357dc35b2e1fa12bb03",
       "generator": "features",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581181
     },
     "apps/mobile/src/features/iotmonitoring/index.ts": {
       "path": "apps/mobile/src/features/iotmonitoring/index.ts",
       "hash": "074b2707aa77f7265afacc9f69c7388357745af981d578b338c7c43ecc90a8aa",
       "generator": "features",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581181
     },
     "apps/web/app/layout.tsx": {
       "path": "apps/web/app/layout.tsx",
       "hash": "6ad11bcbdcac1c4abe71a4dea3fda1e65a4e4b7431e67ce709e4404457c63e42",
       "generator": "web-layout",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581182
     },
     "apps/web/app/routes/home.tsx": {
       "path": "apps/web/app/routes/home.tsx",
       "hash": "718fa70ed7492e98208ddc859c31fbaf55170ed0656dafae05427930e4481cab",
       "generator": "web-home",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581182
     },
     "apps/web/app/components/VideoPlayer.tsx": {
       "path": "apps/web/app/components/VideoPlayer.tsx",
       "hash": "89f15b0249aa917ed7114f05fd9d334098639d441c5c501ae3a2ac0da2f4a73c",
       "generator": "web-components",
-      "timestamp": 1765134255943
+      "timestamp": 1765202581182
     },
     "apps/web/app/components/VideoGrid.tsx": {
       "path": "apps/web/app/components/VideoGrid.tsx",
       "hash": "be5daf2e0657de0e31edeeb70820bc3b6a26b07a39f93cee235d06c4cdb43a75",
       "generator": "web-components",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581183
     },
     "apps/web/app/components/DeviceTable.tsx": {
       "path": "apps/web/app/components/DeviceTable.tsx",
       "hash": "e8d08f2f0fd0f95ce915a80e6f9a6647aea443e29b692428ec1a7e39b9abbd37",
       "generator": "web-components",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581183
     },
     "apps/web/app/routes/videomanagement/VideoManagement.page.tsx": {
       "path": "apps/web/app/routes/videomanagement/VideoManagement.page.tsx",
       "hash": "7ee52da8326577b6e800a6540598c6b4478b2455441b5c8f5c5c6c54c4bcfcb1",
       "generator": "web-pages",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581184
     },
     "apps/web/app/routes/aiprocessing/AIProcessing.page.tsx": {
       "path": "apps/web/app/routes/aiprocessing/AIProcessing.page.tsx",
       "hash": "be1b1cce02d5ca8a47b8ea080e5c5a557bdd02f1acbbdd33a6b6e4ed1ddc6617",
       "generator": "web-pages",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581184
     },
     "apps/web/app/routes/aiprocessing/AIProcessingCreate.page.tsx": {
       "path": "apps/web/app/routes/aiprocessing/AIProcessingCreate.page.tsx",
       "hash": "8ed3d0d3a1b66466383c14192a213faeef4933526cc2372018d61548b9d67b1a",
       "generator": "web-pages",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581184
     },
     "apps/web/app/routes/statistics/Statistics.page.tsx": {
       "path": "apps/web/app/routes/statistics/Statistics.page.tsx",
       "hash": "8564253f614ec1fbe6bb22455a9c911424f7a2fc14a8345f7477c1c6473c47dd",
       "generator": "web-pages",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581184
     },
     "apps/web/app/routes/statistics/StatisticsCreate.page.tsx": {
       "path": "apps/web/app/routes/statistics/StatisticsCreate.page.tsx",
       "hash": "80cba1c7d803046a03c9864efb3e124dd2796c33ef44c3dcb69eceed93fd1fdc",
       "generator": "web-pages",
-      "timestamp": 1765134255944
+      "timestamp": 1765202581184
     },
     "apps/web/app/routes/iotmonitoring/IoTMonitoring.page.tsx": {
       "path": "apps/web/app/routes/iotmonitoring/IoTMonitoring.page.tsx",
       "hash": "57e8d266ad6757ba4dfff27a042fb41bb239ee6de49a740519e3ccefb8a22aaa",
       "generator": "web-pages",
-      "timestamp": 1765134255945
+      "timestamp": 1765202581184
     },
     "apps/web/app/routes.ts": {
       "path": "apps/web/app/routes.ts",
       "hash": "2db9bced87d032f7f155b023a7edcf581d2c4d4fd460c6deca52ec90571afec7",
       "generator": "web-routes",
-      "timestamp": 1765134255945
+      "timestamp": 1765202581184
     },
     "apps/web/tailwind.config.ts": {
       "path": "apps/web/tailwind.config.ts",
       "hash": "c3fa63c34d3ccb58e634633c031933bdc8138af40c3cf08f91bb137982e86ecd",
       "generator": "react-customizer",
-      "timestamp": 1765134255945
+      "timestamp": 1765202581184
     },
     "apps/backend/src/config/server.config.ts": {
       "path": "apps/backend/src/config/server.config.ts",
       "hash": "21abbc790717f95baa4554d1600c049c074a79a38b0a7f6ad233fe1799583e34",
       "generator": "backend-config",
-      "timestamp": 1765134255945
+      "timestamp": 1765202581185
     },
     "apps/backend/src/config/env.config.ts": {
       "path": "apps/backend/src/config/env.config.ts",
       "hash": "89dfe90ce7feab2065c0b8ad0a2462183a36e35172a49a6e9fd94fc2df6425db",
       "generator": "backend-config",
-      "timestamp": 1765134255945
+      "timestamp": 1765202581186
     },
     "apps/backend/prisma/schema.prisma": {
       "path": "apps/backend/prisma/schema.prisma",
-      "hash": "fef7e9f3c62363923e5d9e39168f9f81523a4d3df3eca565f463317eadc4e4d4",
+      "hash": "831ad9846c8f84827f604c99d79ca19f73476e80911c35123a5bfabac94d45f5",
       "generator": "backend-services-database",
-      "timestamp": 1765134255946
+      "timestamp": 1765202581186
+    },
+    "apps/backend/prisma.config.ts": {
+      "path": "apps/backend/prisma.config.ts",
+      "hash": "4f6b9f6b878824f244f41b37d9a56ba1a92a2a4c5cf3de98c5a99d5a63535a09",
+      "generator": "backend-services-database",
+      "timestamp": 1765202581187
     },
     "apps/backend/src/services/database.service.ts": {
       "path": "apps/backend/src/services/database.service.ts",
-      "hash": "4295d4849a12847e3dd2df4da112264a1a9f58f665744f2844bdbb554331b96b",
+      "hash": "8f370a4ea4db1b4d08c40b6532eb85b676edd999fab5bb453ef8b2affe4261a4",
       "generator": "backend-services-database",
-      "timestamp": 1765134255946
+      "timestamp": 1765202581187
     },
     "apps/backend/src/services/storage.service.ts": {
       "path": "apps/backend/src/services/storage.service.ts",
       "hash": "9330becda294999ee83a26c4b24208f5401a0c84794d3621b7cc76a9008244c6",
       "generator": "backend-services-storage",
-      "timestamp": 1765134255946
+      "timestamp": 1765202581188
     },
     "apps/backend/src/services/storage/custom.adapter.ts": {
       "path": "apps/backend/src/services/storage/custom.adapter.ts",
       "hash": "495be05b41151e68cc7fabcba08885c9bfb2932cd5052f26690cb66d64babfce",
       "generator": "backend-services-storage",
-      "timestamp": 1765134255946
+      "timestamp": 1765202581188
     },
     "apps/backend/src/services/storage/upload.utils.ts": {
       "path": "apps/backend/src/services/storage/upload.utils.ts",
       "hash": "b0bf17a0a22f6068a90522cdd53ad689af5e39bf7a19fc2057830e087ad72626",
       "generator": "backend-services-storage",
-      "timestamp": 1765134255947
+      "timestamp": 1765202581188
     },
     "apps/backend/src/services/index.ts": {
       "path": "apps/backend/src/services/index.ts",
       "hash": "6bf5508c54144d9d7a3a456aeb70b4d798b8c3998b8fc73c20948ad0b554c7cd",
       "generator": "backend-services",
-      "timestamp": 1765134255947
+      "timestamp": 1765202581189
     },
     "apps/backend/src/controllers/videomanagement/VideoManagementController.controller.ts": {
       "path": "apps/backend/src/controllers/videomanagement/VideoManagementController.controller.ts",
       "hash": "510380bdedec92381327b7b14a58dcdeb4a743e9f9e80f62f71e497851f0d965",
       "generator": "backend-controllers",
-      "timestamp": 1765134255947
+      "timestamp": 1765202581190
     },
     "apps/backend/src/controllers/videomanagement/index.ts": {
       "path": "apps/backend/src/controllers/videomanagement/index.ts",
       "hash": "7e6c87a9a5e6391e158ef001947460744f44938f9349a65376f612cbd13c2984",
       "generator": "backend-controllers",
-      "timestamp": 1765134255948
+      "timestamp": 1765202581190
     },
     "apps/backend/src/controllers/aiprocessing/AIProcessingController.controller.ts": {
       "path": "apps/backend/src/controllers/aiprocessing/AIProcessingController.controller.ts",
       "hash": "100fd857feeb17d1c3457229c609b5df2b33312bdc9476be95922a13e5092c7e",
       "generator": "backend-controllers",
-      "timestamp": 1765134255948
+      "timestamp": 1765202581190
     },
     "apps/backend/src/controllers/aiprocessing/index.ts": {
       "path": "apps/backend/src/controllers/aiprocessing/index.ts",
       "hash": "dc5868f18bb072f5672ec8738ca373ce88216b6a91b450373b20f08c316d5ba4",
       "generator": "backend-controllers",
-      "timestamp": 1765134255948
+      "timestamp": 1765202581191
     },
     "apps/backend/src/controllers/statistics/StatisticsController.controller.ts": {
       "path": "apps/backend/src/controllers/statistics/StatisticsController.controller.ts",
       "hash": "2ed0dc5be81dd9da714dc0f8e9bc721be696681363f1b17d4d629b20ba2edddd",
       "generator": "backend-controllers",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581191
     },
     "apps/backend/src/controllers/statistics/index.ts": {
       "path": "apps/backend/src/controllers/statistics/index.ts",
       "hash": "7046e4eeb03735699a3287992654688e869e6c2f73014179fd5d6aa7c62a3a86",
       "generator": "backend-controllers",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581191
     },
     "apps/backend/src/controllers/iotmonitoring/IoTMonitoringController.controller.ts": {
       "path": "apps/backend/src/controllers/iotmonitoring/IoTMonitoringController.controller.ts",
       "hash": "9c4e8e14472e7e958c5ee7e120c1d0430ed98a0bc089876867856440dd24784d",
       "generator": "backend-controllers",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581191
     },
     "apps/backend/src/controllers/iotmonitoring/index.ts": {
       "path": "apps/backend/src/controllers/iotmonitoring/index.ts",
       "hash": "57b3a28018223c1214e3f5b0fa884eea55f7497fc77c63c17431f615b7b0af09",
       "generator": "backend-controllers",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581191
     },
     "apps/backend/src/controllers/index.ts": {
       "path": "apps/backend/src/controllers/index.ts",
       "hash": "81ca6fc19f0cc4d5f268aa49dcb1b3853ca2be8e886039b8a85845333e60eb1c",
       "generator": "backend-controllers",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581192
     },
     "apps/backend/src/routes/videomanagement/listvideos.ts": {
       "path": "apps/backend/src/routes/videomanagement/listvideos.ts",
       "hash": "df610d56cc52c2e2acb7b1fa67fd9255927274493e04452000b0042a9773a236",
       "generator": "backend-routes",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581192
     },
     "apps/backend/src/routes/videomanagement/filtervideos.ts": {
       "path": "apps/backend/src/routes/videomanagement/filtervideos.ts",
       "hash": "efb92b8a304a5c548b8a2ca803e6988cab31f3bf7fd4174f46239ff265bcc09b",
       "generator": "backend-routes",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581194
     },
     "apps/backend/src/routes/videomanagement/getvideodetails.ts": {
       "path": "apps/backend/src/routes/videomanagement/getvideodetails.ts",
       "hash": "b3ae47c8037872053268e1c196c0abb259e4debda9c05061d2908bd4aa7366fd",
       "generator": "backend-routes",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581194
     },
     "apps/backend/src/routes/videomanagement/getairesults.ts": {
       "path": "apps/backend/src/routes/videomanagement/getairesults.ts",
       "hash": "0a8d5959b5be5be12ba1d1a0d91b1fa253d2beeb94a757847e03456e46043ad4",
       "generator": "backend-routes",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/aiprocessing/createaijob.ts": {
       "path": "apps/backend/src/routes/aiprocessing/createaijob.ts",
       "hash": "5d6f1d351f558c67ad2fc90123e53b7bf618ffd61336f39ff98a358fc905634b",
       "generator": "backend-routes",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/aiprocessing/validatevideo.ts": {
       "path": "apps/backend/src/routes/aiprocessing/validatevideo.ts",
       "hash": "05aec0ed8cecec3cbac3c09ecf074a02e171cc54b04a9c6a9077af3f255617e4",
       "generator": "backend-routes",
-      "timestamp": 1765134255949
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/aiprocessing/enqueuejob.ts": {
       "path": "apps/backend/src/routes/aiprocessing/enqueuejob.ts",
       "hash": "08a1657d2b53cf71a6c238e243ae5f884d2b955ad05c28867e41329aaf67f1bd",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/aiprocessing/listaijobs.ts": {
       "path": "apps/backend/src/routes/aiprocessing/listaijobs.ts",
       "hash": "9e748620affaffd4fc6091ff8afa9274db7260ee82d6d3ce8f8aaac6ef762512",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/aiprocessing/getaijob.ts": {
       "path": "apps/backend/src/routes/aiprocessing/getaijob.ts",
       "hash": "ade53ea219a0e3f20b4d84382db22df725353a3cc973c71569f4e80b3b069d09",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/aiprocessing/listaijobsbyvideo.ts": {
       "path": "apps/backend/src/routes/aiprocessing/listaijobsbyvideo.ts",
       "hash": "405da04cc927f75d3d443e731302807b41866d79eb9488645171885c06b0696c",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/statistics/getdashboardstats.ts": {
       "path": "apps/backend/src/routes/statistics/getdashboardstats.ts",
       "hash": "bd8c83b989710d6848446cd905101ac1d9a0e4efe4247833c7aca6257aed63ab",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/statistics/aggregatestats.ts": {
       "path": "apps/backend/src/routes/statistics/aggregatestats.ts",
       "hash": "a18aa3e7f17034f3e4343557b143b008badd293d14e53c581ccf790f6d5fa96f",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/statistics/createstatistic.ts": {
       "path": "apps/backend/src/routes/statistics/createstatistic.ts",
       "hash": "d7c0ea29bfeca6438f3bb5ac9133b6aae6f01c6ff36b036d751a8f2e944a3c03",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581195
     },
     "apps/backend/src/routes/statistics/exportstats.ts": {
       "path": "apps/backend/src/routes/statistics/exportstats.ts",
       "hash": "fe5544a952a8f94fa21a9c6c8cc7bb189fccb686a7c6abf032251fd07194e63f",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581196
     },
     "apps/backend/src/routes/statistics/getuserstorage.ts": {
       "path": "apps/backend/src/routes/statistics/getuserstorage.ts",
       "hash": "f5077be1ac10d38329dbc1bdaa5fb8c75cdd4d0501f66fca875c4d0166adb8aa",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581196
     },
     "apps/backend/src/routes/iotmonitoring/listdevices.ts": {
       "path": "apps/backend/src/routes/iotmonitoring/listdevices.ts",
       "hash": "1e6d50eb71fd90796b92e5b69d80a3669d283bfb6da99ea10a8cc02969ffa984",
       "generator": "backend-routes",
-      "timestamp": 1765134255950
+      "timestamp": 1765202581196
     },
     "apps/backend/src/routes/iotmonitoring/refreshdevicestatus.ts": {
       "path": "apps/backend/src/routes/iotmonitoring/refreshdevicestatus.ts",
       "hash": "891556ced114813fcddfd45c393f70d1575eebc810373a5bf86b06f5cea4bb18",
       "generator": "backend-routes",
-      "timestamp": 1765134255952
+      "timestamp": 1765202581196
     },
     "apps/backend/src/routes/index.ts": {
       "path": "apps/backend/src/routes/index.ts",
       "hash": "f6939babce2b7c45d05621f1849b245b843646b04b3777bf54d32bc44e8761c4",
       "generator": "backend-routes",
-      "timestamp": 1765134255952
+      "timestamp": 1765202581196
     },
     "apps/backend/src/index.ts": {
       "path": "apps/backend/src/index.ts",
       "hash": "c28fc6cc8e660b56a39a020c1172d8955c21f94bdff07c1d7b3eb4af25f3b189",
       "generator": "backend-routes",
-      "timestamp": 1765134255952
+      "timestamp": 1765202581197
     }
   },
-  "lastUpdated": 1765134255917
+  "lastUpdated": 1765202581117
 }
