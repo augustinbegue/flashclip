@@ -94,6 +94,7 @@ export class AIProcessingService {
     }
 
     const url = `${this.processingEndpoint}/devices/${this.deviceId}/videos/${videoId}`;
+    console.log('Fetching video details from URL:', url);
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -114,7 +115,7 @@ export class AIProcessingService {
       throw new Error('videoId is required');
     }
 
-    const url = `${this.processingEndpoint}/devices/${this.deviceId}/videos/${videoId}/process`;
+    const url = `${this.processingEndpoint}/devices/${this.deviceId}/videos/${videoId}`;
     const response = await fetch(url, {
       method: 'POST',
     });

@@ -118,7 +118,7 @@ export class VideoManagementController {
         throw new Error("videoId is required");
       }
 
-      const url = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}`);
+      const url = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}.mp4`);
       const video = await this.ensureVideoRecord(videoId, url);
       const aiResults = await this.buildAIResults(videoId);
 
@@ -150,17 +150,18 @@ export class VideoManagementController {
     videoId: string,
     url: string,
   ): Promise<Video> {
-    const existing = await db.video.findUnique({ where: { id: videoId } });
+    let id = videoId.replace(/\.[^.]+$/, "");
+    const existing = await db.video.findUnique({ where: { id } });
     if (existing) {
       if (existing.url !== url) {
-        return db.video.update({ where: { id: videoId }, data: { url } });
+        return db.video.update({ where: { id }, data: { url } });
       }
       return existing;
     }
 
     return db.video.create({
       data: {
-        id: videoId,
+        id,
         title: this.toTitle(videoId),
         description: "",
         url,
@@ -203,7 +204,7 @@ export class VideoManagementController {
       }
     }
 
-    results.original = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}`);
+    results.original = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}.mp4`);
 
     return results;
   }
