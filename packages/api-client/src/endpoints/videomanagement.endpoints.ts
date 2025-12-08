@@ -22,9 +22,4 @@ export class VideomanagementEndpoints {
    * GET /videomanagement/getvideodetails   */
   async getVideoDetails(): Promise<any> {
     return this.client.get(`/videomanagement/getvideodetails`);  }
-                                                                                                                                          
-  /**
-   * GET /videomanagement/getairesults   */
-  async getAIResults(): Promise<any> {
-    return this.client.get(`/videomanagement/getairesults`);  }
             }
