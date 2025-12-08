@@ -42,7 +42,7 @@ export interface VideoResponse {
   title: string;
   description: string;
   url: string;
-  duration: string;
+  duration: number;
   aiResults: AIVideos;
 }
 
