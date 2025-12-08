@@ -37,3 +37,18 @@ export interface VideoCount {
   duration: number;
   userId: string;
 }
+
+export interface VideoResponse {
+  title: string;
+  description: string;
+  url: string;
+  duration: string;
+  aiResults: AIVideos;
+}
+
+export interface AIVideos {
+  emoji: string;
+  engaging: string;
+  subtitles: string;
+  original: string;
+}
