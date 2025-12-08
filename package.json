@@ -4,7 +4,10 @@
   "description": "",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*","apps/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "dev:mobile": "cd apps/mobile && bun run start",
     "dev:web": "cd apps/web && bun run dev",
@@ -17,12 +20,12 @@
     "build:backend": "cd apps/backend && bun run build",
     "build:all": "bun run build && bun run build:mobile && bun run build:web",
     "type-check": "tsc --noEmit",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "format": "cd apps/backend && prisma format",
     "lint": "eslint ."
   },
   "devDependencies": {
     "typescript": "^5.3.3",
     "prettier": "^3.2.5",
     "@types/node": "^20.11.19"
-      }
+  }
 }
