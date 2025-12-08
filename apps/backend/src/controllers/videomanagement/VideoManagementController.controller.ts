@@ -5,13 +5,8 @@
  */
 
 // Domain types from spec
-import { db } from '@/services/database.service';
-import { storage } from '@/services/storage.service';
-import type { AIVideos, Video, VideoResponse } from '@repo/types';
+import type { Video, VideoResponse } from '@repo/types';
 
-const RAW_VIDEO_ROOT = "upload/demo-rpi/";
-const AI_VIDEO_ROOT = "videos/demo-rpi/";
-const AI_VARIANTS = ["emoji.mp4", "engaging.mp4", "subtitles.mp4"] as const;
 
 export class VideoManagementController {
   /**
@@ -20,48 +15,16 @@ export class VideoManagementController {
 
   /**
    * listVideos   */
-  async listVideos(): Promise<{
-    data: Video[];
-    pagination: {
-      total: number;
-      page: number;
-      limit: number;
-      totalPages: number;
-    };
-  }> {
+  async listVideos(): Promise<{ data: Video[]; pagination: { total: number; page: number; limit: number; totalPages: number; } }> {
     try {
-      const listResponse = await storage.list(RAW_VIDEO_ROOT);
-      const videoFiles = (listResponse.files || []).filter((file) =>
-        this.isVideo(file.href),
-      );
-
-      const videos = (
-        await Promise.all(
-          videoFiles.map(async (file) => {
-            const fileName = this.extractFileName(file.href);
-            if (!fileName) return null;
-
-            const url = await storage.getUrl(`${RAW_VIDEO_ROOT}${fileName}`);
-            const record = await this.ensureVideoRecord(fileName, url);
-            return record;
-          }),
-        )
-      ).filter(Boolean) as Video[];
-
-      const total = videos.length;
-      const limit = total || 1;
-
-      return {
-        data: videos,
-        pagination: {
-          total,
-          page: 1,
-          limit,
-          totalPages: Math.max(1, Math.ceil(total / limit)),
-        },
-      };
+      // TODO: Implement listVideos      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
-      console.error("Error in listVideos:", error);
+      console.error('Error in listVideos:', error);
       throw error;
     }
   }
@@ -69,142 +32,53 @@ export class VideoManagementController {
   /**
    * filterVideos   */
   async filterVideos(params: {
-    query?: string | undefined;
-  }): Promise<{
-    data: Video[];
-    pagination: {
-      total: number;
-      page: number;
-      limit: number;
-      totalPages: number;
-    };
-  }> {
+        query?: string | undefined;
+      }): Promise<{ data: Video[]; pagination: { total: number; page: number; limit: number; totalPages: number; } }> {
     try {
-      const query = params.query?.trim().toLowerCase();
-      const { data } = await this.listVideos();
-
-      const filtered = query
-        ? data.filter((video) => {
-            const haystack =
-              `${video.id} ${video.title} ${video.description}`.toLowerCase();
-            return haystack.includes(query);
-          })
-        : data;
-
-      const total = filtered.length;
-      const limit = total || 1;
-
-      return {
-        data: filtered,
-        pagination: {
-          total,
-          page: 1,
-          limit,
-          totalPages: Math.max(1, Math.ceil(total / limit)),
-        },
-      };
+      // TODO: Implement filterVideos      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
-      console.error("Error in filterVideos:", error);
+      console.error('Error in filterVideos:', error);
       throw error;
     }
   }
 
   /**
    * getVideoDetails   */
-  async getVideoDetails(params: { videoId?: string }): Promise<VideoResponse> {
+  async getVideoDetails(params: {
+        videoId?: string;
+      }): Promise<VideoResponse> {
     try {
-      const videoId = params.videoId?.trim();
-      if (!videoId) {
-        throw new Error("videoId is required");
-      }
-
-      const url = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}`);
-      const video = await this.ensureVideoRecord(videoId, url);
-      const aiResults = await this.buildAIResults(videoId);
-
-      return { ...video, aiResults };
+      // TODO: Implement getVideoDetails      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
-      console.error("Error in getVideoDetails:", error);
+      console.error('Error in getVideoDetails:', error);
       throw error;
     }
   }
 
-  private isVideo(href?: string): boolean {
-    return typeof href === "string" && href.toLowerCase().endsWith(".mp4");
-  }
-
-  private extractFileName(href?: string): string | null {
-    if (!href) return null;
-    const parts = href.split("/");
-    const name = parts[parts.length - 1];
-    return name || null;
-  }
-
-  private toTitle(fileName: string): string {
-    const base = fileName.replace(/\.[^.]+$/, "");
-    const pretty = base.replace(/[-_]+/g, " ").trim();
-    return pretty || base || fileName;
-  }
-
-  private async ensureVideoRecord(
-    videoId: string,
-    url: string,
-  ): Promise<Video> {
-    const existing = await db.video.findUnique({ where: { id: videoId } });
-    if (existing) {
-      if (existing.url !== url) {
-        return db.video.update({ where: { id: videoId }, data: { url } });
-      }
-      return existing;
-    }
-
-    return db.video.create({
-      data: {
-        id: videoId,
-        title: this.toTitle(videoId),
-        description: "",
-        url,
-        duration: 0,
-        userId: "system",
-      },
-    });
-  }
-
-  private async buildAIResults(videoId: string): Promise<AIVideos> {
-    const folder = `${AI_VIDEO_ROOT}${videoId}/`;
-    let existing = new Set<string>();
-
+  /**
+   * getAIResults   */
+  async getAIResults(): Promise<Video> {
     try {
-      const list = await storage.list(folder);
-      existing = new Set(
-        (list.files || [])
-          .map((file) => this.extractFileName(file.href))
-          .filter(Boolean) as string[],
-      );
+      // TODO: Implement getAIResults      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
-      console.warn("Could not list AI results for video", videoId, error);
+      console.error('Error in getAIResults:', error);
+      throw error;
     }
-
-    const results: AIVideos = {
-      emoji: "",
-      engaging: "",
-      subtitles: "",
-      original: "",
-    };
-
-    for (const variant of AI_VARIANTS) {
-      const key = variant.replace(".mp4", "") as keyof AIVideos;
-      if (existing.size === 0 || existing.has(variant)) {
-        try {
-          results[key] = await storage.getUrl(`${folder}${variant}`);
-        } catch (error) {
-          results[key] = "";
-        }
-      }
-    }
-
-    results.original = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}`);
-
-    return results;
   }
+
 }

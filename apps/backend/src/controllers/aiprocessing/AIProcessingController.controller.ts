@@ -65,7 +65,7 @@ export class AIProcessingController {
 
   /**
    * listAIJobs   */
-  async listAIJobs(): Promise<AIJob> {
+  async listAIJobs(): Promise<AIJob[]> {
     try {
       // TODO: Implement listAIJobs      // This method should:
       // 1. Validate input parameters
@@ -101,7 +101,7 @@ export class AIProcessingController {
    * listAIJobsByVideo   */
   async listAIJobsByVideo(params: {
         videoId?: string;
-      }): Promise<AIJob> {
+      }): Promise<AIJob[]> {
     try {
       // TODO: Implement listAIJobsByVideo      // This method should:
       // 1. Validate input parameters
