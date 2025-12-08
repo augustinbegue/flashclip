@@ -6,15 +6,20 @@
  */
 
 import { PrismaClient } from "@/generated/prisma";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 
 export class DatabaseService {
   private static instance: DatabaseService;
   private prisma: PrismaClient;
 
   private constructor() {
+        const adapter = new PrismaLibSql({
+      url: process.env.DB_PATH || 'file:./dev.db',
+    });
+    
     this.prisma = new PrismaClient({
       log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-    });
+      adapter,    });
   }
 
   static getInstance(): DatabaseService {
