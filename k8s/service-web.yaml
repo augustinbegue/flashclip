@@ -8,7 +8,8 @@ kind: Service
 metadata:
   name: flashclip-frontend
   namespace: flashclip  labels:
-    app: flashclip    component: frontend
+    app: flashclip
+    component: frontend
 spec:
   type: ClusterIP
   ports:
@@ -17,4 +18,5 @@ spec:
       targetPort: http
       protocol: TCP
   selector:
-    app: flashclip    component: frontend
+    app: flashclip    
+    component: frontend

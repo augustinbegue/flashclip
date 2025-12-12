@@ -7,20 +7,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flashclip-frontend
-  namespace: flashclip  labels:
-    app: flashclip    component: frontend
+  namespace: flashclip
+  labels:
+    app: flashclip
+    component: frontend
 spec:
-  replicas: 1  selector:
+  replicas: 1
+  selector:
     matchLabels:
-      app: flashclip      component: frontend
+      app: flashclip
+      component: frontend
   template:
     metadata:
       labels:
-        app: flashclip        component: frontend
+        app: flashclip
+        component: frontend
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/augustinbegue/flashclip-frontend:latest          imagePullPolicy: Always
+          image: ghcr.io/augustinbegue/flashclip-frontend:latest          
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 80
