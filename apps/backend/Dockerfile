@@ -15,7 +15,7 @@ COPY packages/api-client/package.json ./packages/api-client/
 COPY apps/backend/package.json ./apps/backend/
 
 # Install dependencies
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Stage 2: Build
 FROM oven/bun:1-alpine AS builder
