@@ -11,3 +11,5 @@ export type { PrismaClient } from '@generated/prisma';
 export { StorageService, storage } from './storage.service';
 export type { FileMetadata, UploadOptions } from './storage.service';
 export { validateFile, getFileExtension } from './storage/upload.utils';
+
+export { MqttService, mqttService } from './mqtt.service';
