@@ -15,7 +15,7 @@ COPY packages/api-client/package.json ./packages/api-client/
 COPY apps/web/package.json ./apps/web/
 
 # Install dependencies
-RUN npm install -g bun && bun install
+RUN bun install
 
 # Stage 2: Build
 FROM oven/bun:1-alpine AS builder
