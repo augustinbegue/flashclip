@@ -28,6 +28,8 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy workspace packages and app source
 COPY packages ./packages
 COPY apps/backend ./apps/backend
+ENV DATABASE_URL="file:/data/app.db"
+
 # Generate Prisma client
 RUN cd apps/backend && bunx prisma generate
 
