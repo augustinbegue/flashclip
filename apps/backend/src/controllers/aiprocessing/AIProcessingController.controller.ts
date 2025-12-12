@@ -5,14 +5,10 @@
  */
 
 // Domain types from spec
-import { aiProcessing } from '@/services/aiprocessing.service';
-import { DatabaseService } from '@/services/database.service';
 import type { AIJob } from '@repo/types';
 
-export class AIProcessingController {
-  private aiProcessingService = aiProcessing;
-  private db = DatabaseService.getInstance();
 
+export class AIProcessingController {
   /**
    * Controller methods for aiprocessing feature
    */
@@ -23,29 +19,12 @@ export class AIProcessingController {
         videoId?: string;
       }): Promise<AIJob> {
     try {
-      // Validate input
-      if (!params.videoId) {
-        throw new Error('videoId is required');
-      }
-
-      // Get video details to ensure it exists
-      await this.aiProcessingService.getVideoDetails(params.videoId);
-
-      // Initiate video processing
-      const processResponse = await this.aiProcessingService.processVideo(params.videoId);
-
-      // Create AIJob record in database
-      const aiJob = await this.db.aIJob.create({
-        data: {
-          id: processResponse.data.jobId,
-          videoId: params.videoId,
-        },
-        include: {
-          video: true,
-        },
-      });
-
-      return aiJob as AIJob;
+      // TODO: Implement createAIJob      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in createAIJob:', error);
       throw error;
@@ -53,19 +32,15 @@ export class AIProcessingController {
   }
 
   /**
-   * validateVideo - Validate that a video exists and is in correct format
-   */
-  async validateVideo(videoId: string): Promise<boolean> {
+   * validateVideo   */
+  async validateVideo(): Promise<AIJob> {
     try {
-      // Validate input
-      if (!videoId) {
-        throw new Error('videoId is required');
-      }
-
-      // Attempt to get video details to validate it exists
-      await this.aiProcessingService.getVideoDetails(videoId);
-
-      return true;
+      // TODO: Implement validateVideo      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in validateVideo:', error);
       throw error;
@@ -73,37 +48,15 @@ export class AIProcessingController {
   }
 
   /**
-   * enqueueJob - Enqueue a video for processing
-   */
-  async enqueueJob(videoId: string): Promise<AIJob> {
+   * enqueueJob   */
+  async enqueueJob(): Promise<AIJob> {
     try {
-      // Validate input
-      if (!videoId) {
-        throw new Error('videoId is required');
-      }
-
-      // Validate video exists
-      await this.validateVideo(videoId);
-
-      // Process the video
-      const processResponse = await this.aiProcessingService.processVideo(videoId);
-
-      // Create or update AIJob record in database
-      const aiJob = await this.db.aIJob.upsert({
-        where: { id: processResponse.data.jobId },
-        update: {
-          videoId: videoId,
-        },
-        create: {
-          id: processResponse.data.jobId,
-          videoId: videoId,
-        },
-        include: {
-          video: true,
-        },
-      });
-
-      return aiJob as AIJob;
+      // TODO: Implement enqueueJob      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in enqueueJob:', error);
       throw error;
@@ -114,14 +67,12 @@ export class AIProcessingController {
    * listAIJobs   */
   async listAIJobs(): Promise<AIJob[]> {
     try {
-      // Get all AI jobs from database
-      const aiJobs = await this.db.aIJob.findMany({
-        include: {
-          video: true,
-        },
-      });
-
-      return aiJobs as AIJob[];
+      // TODO: Implement listAIJobs      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in listAIJobs:', error);
       throw error;
@@ -134,27 +85,12 @@ export class AIProcessingController {
         jobId?: string;
       }): Promise<AIJob> {
     try {
-      // Validate input
-      if (!params.jobId) {
-        throw new Error('jobId is required');
-      }
-
-      // Get job from external processing service for status info
-      const jobStatus = await this.aiProcessingService.getJobStatus(params.jobId);
-
-      // Get job from database
-      const aiJob = await this.db.aIJob.findUnique({
-        where: { id: params.jobId },
-        include: {
-          video: true,
-        },
-      });
-
-      if (!aiJob) {
-        throw new Error('Job not found');
-      }
-
-      return aiJob as AIJob;
+      // TODO: Implement getAIJob      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in getAIJob:', error);
       throw error;
@@ -167,28 +103,16 @@ export class AIProcessingController {
         videoId?: string;
       }): Promise<AIJob[]> {
     try {
-      // Validate input
-      if (!params.videoId) {
-        throw new Error('videoId is required');
-      }
-
-      // Validate video exists
-      await this.validateVideo(params.videoId);
-
-      // Get all AI jobs for this video from database
-      const aiJobs = await this.db.aIJob.findMany({
-        where: {
-          videoId: params.videoId,
-        },
-        include: {
-          video: true,
-        },
-      });
-
-      return aiJobs as AIJob[];
+      // TODO: Implement listAIJobsByVideo      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in listAIJobsByVideo:', error);
       throw error;
     }
   }
+
 }

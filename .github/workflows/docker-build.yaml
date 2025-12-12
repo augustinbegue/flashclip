@@ -41,7 +41,8 @@ jobs:
       - name: Build and push backend image
         uses: docker/build-push-action@v6
         with:
-          context: apps/backend          file: apps/backend/Dockerfile
+          context: apps/backend          
+          file: apps/backend/Dockerfile
           push: true
           tags: ${{ steps.build-meta.outputs.tags }}
           labels: ${{ steps.build-meta.outputs.labels }}
@@ -84,6 +85,7 @@ jobs:
           tags: ${{ steps.build-meta.outputs.tags }}
           labels: ${{ steps.build-meta.outputs.labels }}
           build-args: |
-            VITE_API_URL=/api    outputs:
+            VITE_API_URL=/api            
+    outputs:
       image: ${{ steps.build-meta.outputs.tags }}
 
