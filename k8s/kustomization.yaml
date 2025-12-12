@@ -15,4 +15,5 @@ resources:
   - ingress-route.yaml
 
 commonLabels:
-  app.kubernetes.io/name: flashclip  app.kubernetes.io/managed-by: agl-cli
+  app.kubernetes.io/name: flashclip  
+  app.kubernetes.io/managed-by: agl-cli

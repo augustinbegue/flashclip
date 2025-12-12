@@ -5,8 +5,11 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: flashclip  namespace: flashclip  labels:
-    app: flashclipspec:
+  name: flashclip
+  namespace: flashclip
+  labels:
+    app: flashclip    
+spec:
   entryPoints:
     - websecure
   routes:
