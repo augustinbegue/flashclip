@@ -4,7 +4,7 @@
 # ============================================================================
 
 # Stage 1: Install dependencies
-FROM node:20-alpine AS deps
+FROM oven/bun:1-alpine AS deps
 
 WORKDIR /app
 
@@ -18,15 +18,12 @@ COPY apps/web/package.json ./apps/web/
 RUN npm install -g bun && bun install
 
 # Stage 2: Build
-FROM node:20-alpine AS builder
+FROM oven/bun:1-alpine AS builder
 
 WORKDIR /app
 
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/packages/types/node_modules ./packages/types/node_modules
-COPY --from=deps /app/packages/api-client/node_modules ./packages/api-client/node_modules
-COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
 
 # Copy workspace packages and app source
 COPY packages ./packages

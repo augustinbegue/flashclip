@@ -24,9 +24,6 @@ WORKDIR /app
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/packages/types/node_modules ./packages/types/node_modules
-COPY --from=deps /app/packages/api-client/node_modules ./packages/api-client/node_modules
-COPY --from=deps /app/apps/backend/node_modules ./apps/backend/node_modules
 
 # Copy workspace packages and app source
 COPY packages ./packages
@@ -44,7 +41,8 @@ RUN addgroup --system --gid 1001 nodejs && \
 
 # Copy built application
 COPY --from=builder --chown=hono:nodejs /app/packages /app/packages
-COPY --from=builder --chown=hono:nodejs /app/apps/backend /app/apps/backendCOPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
+COPY --from=builder --chown=hono:nodejs /app/apps/backend /app/apps/backend
+COPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
 
 # Create data directory for SQLite
 RUN mkdir -p /data && chown hono:nodejs /data
