@@ -14,14 +14,14 @@ spec:
     - websecure
   routes:
     # Backend API routes (/api)
-    - match: Host(`api.flashclip.server.begue.cc`) && PathPrefix(`/api`)
+    - match: Host(`flashclip.server.begue.cc`) && PathPrefix(`/api`)
       kind: Rule
       priority: 100
       services:
         - name: flashclip-backend
           port: 80
     # Frontend routes (everything else)
-    - match: Host(`api.flashclip.server.begue.cc`)
+    - match: Host(`flashclip.server.begue.cc`)
       kind: Rule
       priority: 1
       services:
