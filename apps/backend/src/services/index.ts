@@ -9,6 +9,8 @@ export { DatabaseService, db } from './database.service';
 
 export { storage, StorageService } from './storage.service';
 export type { FileMetadata, UploadOptions } from './storage.service';
+
+export { MqttService, mqttService } from './mqtt.service';
 export { getFileExtension, validateFile } from './storage/upload.utils';
 
 export { aiProcessing, AIProcessingService } from './aiprocessing.service';
