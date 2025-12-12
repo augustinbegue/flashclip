@@ -8,11 +8,11 @@ FROM oven/bun:1-alpine AS deps
 
 WORKDIR /app
 
-# Copy package files
+# Copy root and workspace package files
 COPY package.json bun.lock* ./
-# Monorepo: copy workspace package files
 COPY packages/types/package.json ./packages/types/
 COPY packages/api-client/package.json ./packages/api-client/
+COPY apps/backend/package.json ./apps/backend/
 
 # Install dependencies
 RUN bun install --frozen-lockfile
@@ -26,27 +26,25 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/packages/types/node_modules ./packages/types/node_modules
 COPY --from=deps /app/packages/api-client/node_modules ./packages/api-client/node_modules
+COPY --from=deps /app/apps/backend/node_modules ./apps/backend/node_modules
 
-# Copy source code
-COPY . .
-
+# Copy workspace packages and app source
+COPY packages ./packages
+COPY apps/backend ./apps/backend
 # Generate Prisma client
-RUN bunx prisma generate
-
-# Build the application (if needed)
-# RUN bun run build
+RUN cd apps/backend && bunx prisma generate
 
 # Stage 3: Production
 FROM oven/bun:1-alpine AS runner
 
-WORKDIR /app
-
+WORKDIR /app/apps/backend
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \
   adduser --system --uid 1001 hono
 
 # Copy built application
-COPY --from=builder --chown=hono:nodejs /app ./
+COPY --from=builder --chown=hono:nodejs /app/packages /app/packages
+COPY --from=builder --chown=hono:nodejs /app/apps/backend /app/apps/backendCOPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
 
 # Create data directory for SQLite
 RUN mkdir -p /data && chown hono:nodejs /data

@@ -8,17 +8,14 @@ FROM node:20-alpine AS deps
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* bun.lock* ./
+# Copy root and workspace package files
+COPY package.json bun.lock* ./
+COPY packages/types/package.json ./packages/types/
+COPY packages/api-client/package.json ./packages/api-client/
+COPY apps/web/package.json ./apps/web/
 
 # Install dependencies
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  elif [ -f bun.lock ]; then npm install -g bun && bun install --frozen-lockfile; \
-  else npm i; \
-  fi
+RUN npm install -g bun && bun install --frozen-lockfile
 
 # Stage 2: Build
 FROM node:20-alpine AS builder
@@ -27,14 +24,19 @@ WORKDIR /app
 
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages/types/node_modules ./packages/types/node_modules
+COPY --from=deps /app/packages/api-client/node_modules ./packages/api-client/node_modules
+COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
 
-# Copy source code
-COPY . .
-
+# Copy workspace packages and app source
+COPY packages ./packages
+COPY apps/web ./apps/web
 # Set build-time environment variables
-ENV VITE_API_URL=/api
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
+
 # Build the application
-RUN npm run build
+RUN cd apps/web && bun run build
 
 # Stage 3: Production with Nginx
 FROM nginx:alpine AS runner
@@ -76,7 +78,7 @@ server {
 EOF
 
 # Copy built assets from builder
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/apps/web/dist /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80
