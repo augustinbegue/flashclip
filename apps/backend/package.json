@@ -14,6 +14,7 @@
     "@hono/zod-validator": "^0.7.5",
     "@prisma/adapter-better-sqlite3": "^7.1.0",
     "@prisma/client": "latest",
+    "better-sqlite3": "^12.5.0",
     "hono": "^4.10.7",
     "mime-types": "latest",
     "zod": "^4.1.13"
