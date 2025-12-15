@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.5",
-    "@prisma/adapter-libsql": "^7.1.0",
+    "@prisma/adapter-better-sqlite3": "^7.1.0",
     "@prisma/client": "latest",
     "hono": "^4.10.7",
     "mime-types": "latest",

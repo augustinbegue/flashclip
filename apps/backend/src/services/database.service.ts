@@ -6,14 +6,14 @@
  */
 
 import { PrismaClient } from "@/generated/prisma";
-import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
 export class DatabaseService {
   private static instance: DatabaseService;
   private prisma: PrismaClient;
 
   private constructor() {
-        const adapter = new PrismaLibSql({
+        const adapter = new PrismaBetterSqlite3({
       url: process.env.DB_PATH || 'file:./dev.db',
     });
     
