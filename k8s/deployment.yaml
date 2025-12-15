@@ -36,7 +36,7 @@ spec:
               value: "production"
             - name: PORT
               value: "3000"
-            - name: DATABASE_URL
+            - name: DB_PATH
               value: "file:/data/app.db"
             - name: PROCESSING_ENDPOINT
               value: "http://flashclip-processing:4000"
@@ -51,8 +51,6 @@ spec:
               value: "demo-rpi"
             - name: API_PREFIX
               value: "/api"
-            - name: DATABASE_URL
-              value: "file:/data/app.db"
           volumeMounts:
             - name: data
               mountPath: /data
