@@ -2,7 +2,7 @@
   "name": "app",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "start": "bun run src/index.ts",
+    "start": "bun run db:push && bun run src/index.ts",
     "build": "tsc",
     "test": "bun test",
     "db:generate": "prisma generate",
