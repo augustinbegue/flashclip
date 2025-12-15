@@ -38,10 +38,6 @@ FROM oven/bun:1-slim AS runner
 
 WORKDIR /app/apps/backend
 
-# Create non-root user for security
-RUN addgroup --system nodejs && \
-  adduser --system --uid 1001 hono
-
 # Copy built application
 COPY --from=builder --chown=hono:nodejs /app/packages /app/packages
 COPY --from=builder --chown=hono:nodejs /app/apps/backend /app/apps/backend
