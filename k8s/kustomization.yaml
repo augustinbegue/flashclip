@@ -9,7 +9,7 @@ namespace: flashclip
 resources:
   - pvc.yaml
   - pvc-processing.yaml
-  - secret-processing.yaml
+  # - secret-processing.yaml
   - deployment.yaml
   - deployment-processing.yaml
   - deployment-web.yaml
