@@ -39,9 +39,9 @@ FROM oven/bun:1-slim AS runner
 WORKDIR /app/apps/backend
 
 # Copy built application
-COPY --from=builder --chown=hono:nodejs /app/packages /app/packages
-COPY --from=builder --chown=hono:nodejs /app/apps/backend /app/apps/backend
-COPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
+COPY --from=builder /app/packages /app/packages
+COPY --from=builder /app/apps/backend /app/apps/backend
+COPY --from=builder /app/node_modules /app/node_modules
 
 # Create data directory for SQLite
 RUN mkdir -p /data && chown hono:nodejs /data
@@ -54,9 +54,6 @@ ENV DATABASE_URL="file:/data/app.db"
 
 # Expose port
 EXPOSE 3000
-
-# Switch to non-root user
-USER hono
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
