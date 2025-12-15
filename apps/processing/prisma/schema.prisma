@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Video {
+  id           String   @id @default(uuid())
+  deviceId     String
+  videoId      String
+  timestamp    DateTime
+  status       String   @default("AVAILABLE") // AVAILABLE | PROCESSED | PROCESSING | FAILED
+  recommended  Boolean  @default(false)
+  duration     Int // in seconds
+  resolution   String // e.g., "1920x1080"
+  thumbnailUrl String?
+  originalPath String // path on remote server
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  jobs     Job[]
+  versions VideoVersion[]
+
+  @@unique([deviceId, videoId])
+  @@index([deviceId])
+  @@index([videoId])
+}
+
+model Job {
+  id        String   @id @default(uuid())
+  jobId     String   @unique
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  status    String   @default("PENDING") // PENDING | PROCESSING | COMPLETED | FAILED
+  progress  Int      @default(0) // 0-100
+  error     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VideoVersion {
+  id           String   @id @default(uuid())
+  videoId      String
+  video        Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  type         String // ORIGINAL | SUBTITLED | SUBTITLED_ENGAGING | SUBTITLED_EMOJI
+  url          String // public URL
+  title        String
+  description  String
+  thumbnailUrl String?
+  filePath     String // path on remote server
+  createdAt    DateTime @default(now())
+}

@@ -7,7 +7,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flashclip-backend
-  namespace: flashclip  
+  namespace: flashclip
   labels:
     app: flashclip
     component: backend
@@ -38,9 +38,22 @@ spec:
               value: "3000"
             - name: DATABASE_URL
               value: "file:/data/app.db"
+            - name: PROCESSING_ENDPOINT
+              value: "http://flashclip-processing:4000"
+            - name: FILE_SERVER_URL
+              value: "https://files.server.begue.cc/flashclip"
+            - name: FILE_SERVER_PW
+              valueFrom:
+                secretKeyRef:
+                  name: flashclip-processing-secrets
+                  key: FILESERVER_PASSWORD
+            - name: DEVICE_ID
+              value: "demo-rpi"
+            - name: API_PREFIX
+              value: "/api"
           volumeMounts:
             - name: data
-              mountPath: /data              
+              mountPath: /data
       volumes:
         - name: data
           persistentVolumeClaim:
