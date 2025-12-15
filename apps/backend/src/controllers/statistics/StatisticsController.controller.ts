@@ -6,23 +6,73 @@
 
 // Domain types from spec
 import type { Statistic, StorageInfo } from '@repo/types';
+import { DatabaseService } from '@/services/database.service';
+import { StorageService } from '@/services/storage.service';
 
 
 export class StatisticsController {
+  private db = DatabaseService.getInstance();
+  private storageService = StorageService.getInstance();
+
   /**
    * Controller methods for statistics feature
    */
 
   /**
    * getDashboardStats   */
-  async getDashboardStats(): Promise<Statistic> {
+  async getDashboardStats(): Promise<any> {
     try {
-      // TODO: Implement getDashboardStats      // This method should:
-      // 1. Validate input parameters
-      // 2. Call appropriate services
-      // 3. Transform and return data
+      // Get total videos count
+      const totalVideos = await this.db.video.count();
+
+      // Get total AI jobs count
+      const totalAIJobs = await this.db.aIJob.count();
+
+      // Get total devices (unique userId from videos)
+      const videos = await this.db.video.findMany({
+        select: { userId: true }
+      });
+      const uniqueDevices = new Set(videos.map(v => v.userId));
+      const totalDevices = uniqueDevices.size;
+
+      // Get storage info
+      const storageInfo = await this.storageService.getStorageInfo();
+
+      // Get videos by status (for now, all videos are "ready")
+      const videosByStatus = {
+        ready: totalVideos,
+        processing: 0,
+        failed: 0
+      };
+
+      // Get AI jobs by status
+      const aiJobs = await this.db.aIJob.findMany({
+        select: { status: true }
+      });
       
-      throw new Error('Not implemented');
+      const aiJobsByStatus: Record<string, number> = {
+        completed: 0,
+        processing: 0,
+        pending: 0,
+        failed: 0
+      };
+
+      aiJobs.forEach(job => {
+        const status = job.status.toLowerCase();
+        if (status in aiJobsByStatus) {
+          aiJobsByStatus[status]++;
+        }
+      });
+
+      return {
+        totalVideos,
+        totalAIJobs,
+        totalDevices,
+        storageUsed: storageInfo.used,
+        storageLimit: storageInfo.limit,
+        videosByStatus,
+        aiJobsByStatus
+      };
     } catch (error) {
       console.error('Error in getDashboardStats:', error);
       throw error;

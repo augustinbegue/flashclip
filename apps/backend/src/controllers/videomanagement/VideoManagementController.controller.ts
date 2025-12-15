@@ -20,15 +20,7 @@ export class VideoManagementController {
 
   /**
    * listVideos   */
-  async listVideos(): Promise<{
-    data: Video[];
-    pagination: {
-      total: number;
-      page: number;
-      limit: number;
-      totalPages: number;
-    };
-  }> {
+  async listVideos(): Promise<Video[]> {
     try {
       const listResponse = await storage.list(RAW_VIDEO_ROOT);
       const videoFiles = (listResponse.files || []).filter((file) =>
@@ -48,18 +40,7 @@ export class VideoManagementController {
         )
       ).filter(Boolean) as Video[];
 
-      const total = videos.length;
-      const limit = total || 1;
-
-      return {
-        data: videos,
-        pagination: {
-          total,
-          page: 1,
-          limit,
-          totalPages: Math.max(1, Math.ceil(total / limit)),
-        },
-      };
+      return videos;
     } catch (error) {
       console.error("Error in listVideos:", error);
       throw error;
@@ -70,39 +51,20 @@ export class VideoManagementController {
    * filterVideos   */
   async filterVideos(params: {
     query?: string | undefined;
-  }): Promise<{
-    data: Video[];
-    pagination: {
-      total: number;
-      page: number;
-      limit: number;
-      totalPages: number;
-    };
-  }> {
+  }): Promise<Video[]> {
     try {
       const query = params.query?.trim().toLowerCase();
-      const { data } = await this.listVideos();
+      const videos = await this.listVideos();
 
       const filtered = query
-        ? data.filter((video) => {
+        ? videos.filter((video) => {
             const haystack =
               `${video.id} ${video.title} ${video.description}`.toLowerCase();
             return haystack.includes(query);
           })
-        : data;
+        : videos;
 
-      const total = filtered.length;
-      const limit = total || 1;
-
-      return {
-        data: filtered,
-        pagination: {
-          total,
-          page: 1,
-          limit,
-          totalPages: Math.max(1, Math.ceil(total / limit)),
-        },
-      };
+      return filtered;
     } catch (error) {
       console.error("Error in filterVideos:", error);
       throw error;
@@ -125,6 +87,62 @@ export class VideoManagementController {
       return { ...video, aiResults };
     } catch (error) {
       console.error("Error in getVideoDetails:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * getAIResults - Récupère uniquement les URLs des vidéos générées par IA
+   */
+  async getAIResults(params: { videoId?: string }): Promise<{ data: AIVideos }> {
+    try {
+      const videoId = params.videoId?.trim();
+      if (!videoId) {
+        throw new Error("videoId is required");
+      }
+
+      const aiResults = await this.buildAIResults(videoId);
+
+      return { data: aiResults };
+    } catch (error) {
+      console.error("Error in getAIResults:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * getAIVideo - Récupère l'URL d'une variante spécifique de vidéo IA
+   */
+  async getAIVideo(params: { videoId?: string; variant?: string }): Promise<{ data: { url: string } }> {
+    try {
+      const videoId = params.videoId?.trim();
+      const variant = params.variant?.trim().toLowerCase();
+
+      if (!videoId) {
+        throw new Error("videoId is required");
+      }
+
+      if (!variant) {
+        throw new Error("variant is required");
+      }
+
+      const validVariants = ["original", "emoji", "engaging", "subtitles"];
+      if (!validVariants.includes(variant)) {
+        throw new Error(`Invalid variant. Must be one of: ${validVariants.join(", ")}`);
+      }
+
+      const baseVideoId = videoId.replace(/\.mp4$/, "");
+      let url: string;
+
+      if (variant === "original") {
+        url = await storage.getUrl(`${RAW_VIDEO_ROOT}${baseVideoId}.mp4`);
+      } else {
+        url = await storage.getUrl(`${RAW_VIDEO_ROOT}${baseVideoId}_${variant}.mp4`);
+      }
+
+      return { data: { url } };
+    } catch (error) {
+      console.error("Error in getAIVideo:", error);
       throw error;
     }
   }
@@ -172,19 +190,8 @@ export class VideoManagementController {
   }
 
   private async buildAIResults(videoId: string): Promise<AIVideos> {
-    const folder = `${AI_VIDEO_ROOT}${videoId}/`;
-    let existing = new Set<string>();
-
-    try {
-      const list = await storage.list(folder);
-      existing = new Set(
-        (list.files || [])
-          .map((file) => this.extractFileName(file.href))
-          .filter(Boolean) as string[],
-      );
-    } catch (error) {
-      console.warn("Could not list AI results for video", videoId, error);
-    }
+    // Remove .mp4 extension if present
+    const baseVideoId = videoId.replace(/\.mp4$/, "");
 
     const results: AIVideos = {
       emoji: "",
@@ -193,18 +200,21 @@ export class VideoManagementController {
       original: "",
     };
 
+    // Generate URLs for AI variants in the format: {videoId}_emoji.mp4
+    // All variants are in the same folder as the original (upload/demo-rpi/)
     for (const variant of AI_VARIANTS) {
       const key = variant.replace(".mp4", "") as keyof AIVideos;
-      if (existing.size === 0 || existing.has(variant)) {
-        try {
-          results[key] = await storage.getUrl(`${folder}${variant}`);
-        } catch (error) {
-          results[key] = "";
-        }
+      try {
+        // Format: upload/demo-rpi/{videoId}_emoji.mp4
+        const path = `${RAW_VIDEO_ROOT}${baseVideoId}_${key}.mp4`;
+        results[key] = await storage.getUrl(path);
+      } catch (error) {
+        results[key] = "";
       }
     }
 
-    results.original = await storage.getUrl(`${RAW_VIDEO_ROOT}${videoId}.mp4`);
+    // Original video URL
+    results.original = await storage.getUrl(`${RAW_VIDEO_ROOT}${baseVideoId}.mp4`);
 
     return results;
   }

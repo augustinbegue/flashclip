@@ -30,6 +30,10 @@ model Video {
 model AIJob {
   id String @id @default(uuid())
 
+  type   String  @default("summary")  // transcription, object-detection, scene-analysis, summary
+  status String  @default("pending")  // pending, processing, completed, failed
+  result String? // JSON result from AI processing
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -117,6 +117,54 @@ export class StorageService {
   }
 
   /**
+   * Get storage info (used space and limit)
+   */
+  async getStorageInfo(): Promise<{ used: number; limit: number }> {
+    try {
+      // Get all videos to calculate total storage
+      const listResult = await this.list('upload', { includeDots: false });
+      
+      let totalSize = 0;
+      
+      // Calculate size from all files
+      const calculateDirSize = async (dirPath: string): Promise<number> => {
+        const result = await this.list(dirPath, { includeDots: false });
+        let size = 0;
+        
+        // Add file sizes
+        for (const file of result.files) {
+          size += file.sz || 0;
+        }
+        
+        // Recursively calculate subdirectories
+        for (const dir of result.dirs) {
+          const subPath = dir.href.replace(/\/$/, '');
+          size += await calculateDirSize(subPath);
+        }
+        
+        return size;
+      };
+      
+      totalSize = await calculateDirSize('upload');
+      
+      // Storage limit: 100 GB
+      const storageLimit = 107374182400; // 100 GB in bytes
+      
+      return {
+        used: totalSize,
+        limit: storageLimit
+      };
+    } catch (error) {
+      console.error('Error getting storage info:', error);
+      // Return default values if there's an error
+      return {
+        used: 0,
+        limit: 107374182400 // 100 GB
+      };
+    }
+  }
+
+  /**
    * Generate file path based on structure configuration
    */
   private generatePath(file: File | Blob, options?: UploadOptions): string {

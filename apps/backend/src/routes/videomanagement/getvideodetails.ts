@@ -34,7 +34,7 @@ router.get(
       });
 
       // Return response
-      return c.json(result);
+      return c.json({ data: result });
     } catch (error) {
       console.error('Error in /videomanagement/getvideodetails GET:', error);
       return c.json(

@@ -10,7 +10,11 @@ const controller = new VideoManagementController();
 // Validation Schemas
 // ============================================================================
 
-// --- GET /videomanagement/listvideos ---
+// --- GET /videomanagement/getaivideo ---
+const getQuerySchema = z.object({
+  videoId: z.string(),
+  variant: z.enum(['original', 'emoji', 'engaging', 'subtitles']),
+});
 
 // ============================================================================
 // Route Handlers
@@ -18,17 +22,23 @@ const controller = new VideoManagementController();
 
 router.get(
   '/',
+  zValidator('query', getQuerySchema),
   async (c) => {
     try {
 
+      // Extract validated query parameters
+      const { videoId, variant } = c.req.valid('query');
 
       // Call controller method
-      const result = await controller.listVideos();
+      const result = await controller.getAIVideo({
+        videoId,
+        variant,
+      });
 
       // Return response
-      return c.json({ data: result });
+      return c.json(result);
     } catch (error) {
-      console.error('Error in /videomanagement/listvideos GET:', error);
+      console.error('Error in /videomanagement/getaivideo GET:', error);
       return c.json(
         { error: error instanceof Error ? error.message : 'Internal server error' },
         500

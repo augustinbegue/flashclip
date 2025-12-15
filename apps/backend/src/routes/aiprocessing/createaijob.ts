@@ -10,33 +10,35 @@ const controller = new AIProcessingController();
 // Validation Schemas
 // ============================================================================
 
-// --- GET /aiprocessing/createaijob ---
-const getQuerySchema = z.object({
+// --- POST /aiprocessing/createaijob ---
+const postBodySchema = z.object({
   videoId: z.string(),
+  type: z.enum(['emoji', 'engaging', 'subtitles']).default('emoji'),
 });
 
 // ============================================================================
 // Route Handlers
 // ============================================================================
 
-router.get(
+router.post(
   '/',
-  zValidator('query', getQuerySchema),
+  zValidator('json', postBodySchema),
   async (c) => {
     try {
 
-      // Extract validated query parameters
-      const { videoId } = c.req.valid('query');
+      // Extract validated body parameters
+      const { videoId, type } = c.req.valid('json');
 
       // Call controller method
       const result = await controller.createAIJob({
         videoId,
+        type,
       });
 
       // Return response
-      return c.json(result);
+      return c.json({ data: result });
     } catch (error) {
-      console.error('Error in /aiprocessing/createaijob GET:', error);
+      console.error('Error in /aiprocessing/createaijob POST:', error);
       return c.json(
         { error: error instanceof Error ? error.message : 'Internal server error' },
         500

@@ -27,5 +27,9 @@
     "typescript": "^5.3.3",
     "prettier": "^3.2.5",
     "@types/node": "^20.11.19"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "@prisma/adapter-libsql": "^7.1.0"
   }
 }

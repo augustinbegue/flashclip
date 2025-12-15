@@ -21,31 +21,44 @@ export class AIProcessingController {
    * createAIJob   */
   async createAIJob(params: {
         videoId?: string;
-      }): Promise<AIJob> {
+        type?: string;
+      }): Promise<any> {
     try {
       // Validate input
       if (!params.videoId) {
         throw new Error('videoId is required');
       }
 
-      // Get video details to ensure it exists
-      await this.aiProcessingService.getVideoDetails(params.videoId);
+      const type = params.type || 'summary';
 
-      // Initiate video processing
-      const processResponse = await this.aiProcessingService.processVideo(params.videoId);
+      // Verify video exists in database
+      const video = await this.db.video.findUnique({
+        where: { id: params.videoId }
+      });
+
+      if (!video) {
+        throw new Error(`Video with id ${params.videoId} not found`);
+      }
 
       // Create AIJob record in database
       const aiJob = await this.db.aIJob.create({
         data: {
-          id: processResponse.data.jobId,
           videoId: params.videoId,
+          type: type,
+          status: 'pending',
         },
         include: {
           video: true,
         },
       });
 
-      return aiJob as AIJob;
+      return {
+        jobId: aiJob.id,
+        videoId: aiJob.videoId,
+        type: aiJob.type,
+        status: aiJob.status,
+        createdAt: aiJob.createdAt,
+      };
     } catch (error) {
       console.error('Error in createAIJob:', error);
       throw error;
