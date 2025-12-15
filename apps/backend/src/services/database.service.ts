@@ -6,15 +6,15 @@
  */
 
 import { PrismaClient } from "@/generated/prisma";
-import { BunSQLiteAdapter } from "@abcx3/prisma-bun-adapter";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 
 export class DatabaseService {
   private static instance: DatabaseService;
   private prisma: PrismaClient;
 
   private constructor() {
-    const adapter = new BunSQLiteAdapter({
-      filename: process.env.DB_PATH || './dev.db',
+    const adapter = new PrismaLibSql({
+      url: process.env.DB_PATH || 'file:./dev.db',
     });
     
     this.prisma = new PrismaClient({
