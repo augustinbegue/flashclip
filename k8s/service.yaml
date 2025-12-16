@@ -12,7 +12,7 @@ metadata:
     app: flashclip
     component: backend
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: http
       port: 80
