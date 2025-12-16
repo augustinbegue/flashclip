@@ -58,6 +58,7 @@ export class VideosController {
    * Get video details with all versions
    */
   async getVideoDetails(deviceId: string, videoId: string) {
+    await this.listVideos(deviceId); // Ensure reconciliation before fetching details
     const video = await this.databaseService.findVideo(deviceId, videoId);
 
     if (!video) {
@@ -85,6 +86,7 @@ export class VideosController {
    * Initiate processing for a video
    */
   async initiateProcessing(deviceId: string, videoId: string) {
+    await this.listVideos(deviceId); // Ensure reconciliation before fetching details
     const video = await this.databaseService.findVideo(deviceId, videoId);
 
     if (!video) {
