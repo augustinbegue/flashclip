@@ -5,10 +5,13 @@
  */
 
 // Domain types from spec
+import { DatabaseService } from '@/services';
 import type { Statistic, StorageInfo } from '@repo/types';
 
 
 export class StatisticsController {
+  private db = DatabaseService.getInstance();
+  
   /**
    * Controller methods for statistics feature
    */
