@@ -5,12 +5,14 @@
  */
 
 // Domain types from spec
-import { DatabaseService } from '@/services';
+import { AIJobStatus } from '@/generated/prisma';
+import { DatabaseService, StorageService } from '@/services';
 import type { Statistic, StorageInfo } from '@repo/types';
 
 
 export class StatisticsController {
   private db = DatabaseService.getInstance();
+  private storageService = StorageService.getInstance();
   
   /**
    * Controller methods for statistics feature
@@ -44,19 +46,17 @@ export class StatisticsController {
       };
 
       // Get AI jobs by status
-      const aiJobs = await this.db.aIJob.findMany({
-        select: { status: true }
-      });
+      const aiJobs = await this.db.aIJob.findMany();
       
-      const aiJobsByStatus: Record<string, number> = {
-        completed: 0,
-        processing: 0,
-        pending: 0,
-        failed: 0
+      const aiJobsByStatus: Record<AIJobStatus, number> = {
+        COMPLETED: 0,
+        PROCESSING: 0,
+        PENDING: 0,
+        FAILED: 0
       };
 
       aiJobs.forEach(job => {
-        const status = job.status.toLowerCase();
+        const status = job.status;
         if (status in aiJobsByStatus) {
           aiJobsByStatus[status]++;
         }
@@ -69,7 +69,12 @@ export class StatisticsController {
         storageUsed: storageInfo.used,
         storageLimit: storageInfo.limit,
         videosByStatus,
-        aiJobsByStatus
+        aiJobsByStatus: {
+          completed: aiJobsByStatus.COMPLETED,
+          processing: aiJobsByStatus.PROCESSING,
+          pending: aiJobsByStatus.PENDING,
+          failed: aiJobsByStatus.FAILED
+        }
       };
     } catch (error) {
       console.error('Error in getDashboardStats:', error);
