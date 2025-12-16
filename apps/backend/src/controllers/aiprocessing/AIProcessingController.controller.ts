@@ -5,7 +5,7 @@
  */
 
 // Domain types from spec
-import { aiProcessing } from '@/services/aiprocessing.service';
+import { aiProcessing, JobStatusResponse } from '@/services/aiprocessing.service';
 import { DatabaseService } from '@/services/database.service';
 import type { AIJob } from '@repo/types';
 
@@ -132,7 +132,7 @@ export class AIProcessingController {
    * getAIJob   */
   async getAIJob(params: {
         jobId?: string;
-      }): Promise<AIJob> {
+      }): Promise<AIJob & { status: JobStatusResponse }> {
     try {
       // Validate input
       if (!params.jobId) {
@@ -154,7 +154,10 @@ export class AIProcessingController {
         throw new Error('Job not found');
       }
 
-      return aiJob as AIJob;
+      return {
+        ...aiJob,
+        status: jobStatus
+      }
     } catch (error) {
       console.error('Error in getAIJob:', error);
       throw error;
