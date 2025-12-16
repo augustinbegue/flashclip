@@ -9,7 +9,6 @@ import { AIJobStatus } from '@/generated/prisma';
 import { DatabaseService, StorageService } from '@/services';
 import type { Statistic, StorageInfo } from '@repo/types';
 
-
 export class StatisticsController {
   private db = DatabaseService.getInstance();
   private storageService = StorageService.getInstance();
@@ -27,13 +26,6 @@ export class StatisticsController {
 
       // Get total AI jobs count
       const totalAIJobs = await this.db.aIJob.count();
-
-      // Get total devices (unique userId from videos)
-      const videos = await this.db.video.findMany({
-        select: { userId: true }
-      });
-      const uniqueDevices = new Set(videos.map(v => v.userId));
-      const totalDevices = uniqueDevices.size;
 
       // Get storage info
       const storageInfo = await this.storageService.getStorageInfo();
@@ -65,7 +57,7 @@ export class StatisticsController {
       return {
         totalVideos,
         totalAIJobs,
-        totalDevices,
+        totalDevices: 1,
         storageUsed: storageInfo.used,
         storageLimit: storageInfo.limit,
         videosByStatus,

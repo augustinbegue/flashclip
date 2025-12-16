@@ -123,6 +123,7 @@ export class StorageService {
     // List all files and sum sizes
     let used = 0;
     const listAllFiles = async (path: string) => {
+      console.log('Listing path:', path);
       const list = await this.list(path);
       for (const file of list.files) {
         if (file.sz) {
@@ -130,7 +131,7 @@ export class StorageService {
         }
       }
       for (const dir of list.dirs) {
-        await listAllFiles(dir.href);
+        await listAllFiles(`${path}${dir.href}`);
       }
     };
 
