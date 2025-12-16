@@ -31,5 +31,7 @@ import route12 from './iotmonitoring/listdevices';
 app.route('/iotmonitoring/listdevices', route12);
 import route13 from './iotmonitoring/refreshdevicestatus';
 app.route('/iotmonitoring/refreshdevicestatus', route13);
+import route14 from './iotmonitoring/startrecord';
+app.route('/iotmonitoring/startrecord', route14);
 
 export default app;
