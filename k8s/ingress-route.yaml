@@ -8,20 +8,20 @@ metadata:
   name: flashclip
   namespace: flashclip
   labels:
-    app: flashclip    
+    app: flashclip
 spec:
   entryPoints:
     - websecure
   routes:
     # Backend API routes (/api)
-    - match: Host(`flashclip.server.begue.cc`) && PathPrefix(`/api`)
+    - match: Host(`flashclip.cloud`) && PathPrefix(`/api`)
       kind: Rule
       priority: 100
       services:
         - name: flashclip-backend
           port: 80
     # Frontend routes (everything else)
-    - match: Host(`flashclip.server.begue.cc`)
+    - match: Host(`flashclip.cloud`)
       kind: Rule
       priority: 1
       services:

@@ -831,7 +831,7 @@
       "deployment": {
         "enabled": true,
         "githubRepo": "https://github.com/augustinbegue/flashclip.git",
-        "publicUrl": "flashclip.server.begue.cc",
+        "publicUrl": "flashclip.cloud",
         "docker": {
           "enabled": true
         },
@@ -852,7 +852,7 @@
           },
           "ingress": {
             "enabled": true,
-            "domain": "api.flashclip.server.begue.cc",
+            "domain": "flashclip.cloud",
             "tls": {
               "enabled": true,
               "issuerName": "letsencrypt"
