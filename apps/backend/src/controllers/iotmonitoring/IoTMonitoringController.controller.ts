@@ -5,9 +5,12 @@
  */
 
 // Domain types from spec
+import { mqttService } from '@/services/mqtt.service';
 import type { IoTDevice } from '@repo/types';
 
-
+function generateId(): string {
+  return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+}
 export class IoTMonitoringController {
   /**
    * Controller methods for iotmonitoring feature
@@ -45,4 +48,25 @@ export class IoTMonitoringController {
     }
   }
 
+  /**
+   * Start record remotly
+   */
+  async startRecord(deviceId: string): Promise<{ ok : boolean; id?: string }> {
+    try {
+      const id = generateId();
+      const payload = {
+        type: 'start_record',
+        data: {},
+        id,
+      };
+      await mqttService.publish(`flashclip/${deviceId}/commands`, payload, {
+        qos: 1,
+      });
+
+      return { ok: true, id };
+    } catch (error) {
+      console.error('Error in startRecord:', error);
+      throw { ok: false };
+    }
+  }
 }

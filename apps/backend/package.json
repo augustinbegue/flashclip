@@ -14,9 +14,11 @@
     "@hono/zod-validator": "^0.7.5",
     "@prisma/adapter-libsql": "^7.1.0",
     "@prisma/client": "latest",
+    "aedes": "^0.51.3",
     "dotenv": "^17.2.3",
     "hono": "^4.10.7",
     "mime-types": "latest",
+    "mqtt": "^5.14.1",
     "zod": "^4.1.13"
   },
   "devDependencies": {
