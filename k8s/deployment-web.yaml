@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: mzzay/iot-dashboard:x64
+          image: mzzay/iot-dashboard:v1.2
           imagePullPolicy: Always
           ports:
             - name: http
