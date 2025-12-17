@@ -8,6 +8,7 @@
 import Aedes from 'aedes';
 import { createServer, Server } from 'net';
 import { connect, MqttClient } from 'mqtt';
+import { IoTMonitoringController } from '@/controllers';
 
 /**
  * Minimal MQTT service: start/stop broker, publish messages and perform
@@ -20,6 +21,7 @@ export class MqttService {
   private port: number;
   private isRunning: boolean = false;
   private clientId: string;
+  private iotMonitoring : IoTMonitoringController = new IoTMonitoringController();
 
   constructor(port: number = 1883, clientId: string = 'flashclip-backend-internal') {
     this.port = port;
@@ -42,6 +44,22 @@ export class MqttService {
 
         this.client.on('connect', () => {
           console.log('[MQTT] internal client connected');
+        });
+
+        this.client.on('message', (topic, message) => {
+          if (topic.endsWith('/info')) {
+            // save info to database
+            const deviceName = topic.split('/')[1];
+            const info = message.toString();
+            console.log(`[MQTT] Info from device ${deviceName}: ${info}`);
+
+            this.iotMonitoring.saveAgentInfo(deviceName, JSON.parse(info)).catch((e) => {
+              console.error(
+                `[MQTT] Failed to save agent info for device ${deviceName}:`,
+                e
+              );
+            });
+          }
         });
 
         this.client.on('error', (e) =>

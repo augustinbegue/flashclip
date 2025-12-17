@@ -38,3 +38,12 @@ model AIJob {
 
   videoId String
 }
+
+model AgentInfo {
+  id               String   @id @default(cuid())
+  deviceId         String   @unique
+  info             Json
+  versionTimestamp BigInt?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

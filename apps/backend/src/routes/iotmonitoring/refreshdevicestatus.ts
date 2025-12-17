@@ -23,7 +23,7 @@ router.get(
 
 
       // Call controller method
-      const result = await controller.refreshDeviceStatus();
+      const result = await controller.refreshDeviceStatus(process.env.DEVICE_ID || 'demo-rpi');
 
       // Return response
       return c.json(result);

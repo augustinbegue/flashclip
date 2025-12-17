@@ -50,6 +50,13 @@ export class DatabaseService {
   }
 
   /**
+   * get AgentInfo
+   */
+  get agentInfo() {
+    return this.prisma.agentInfo;
+  }
+
+  /**
    * Execute operations in a transaction
    */
   async transaction<T>(fn: (prisma: PrismaClient) => Promise<T>): Promise<T> {

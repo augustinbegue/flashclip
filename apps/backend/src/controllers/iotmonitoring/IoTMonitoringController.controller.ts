@@ -5,13 +5,28 @@
  */
 
 // Domain types from spec
+import { DatabaseService } from '@/services/database.service';
 import { mqttService } from '@/services/mqtt.service';
 import type { IoTDevice } from '@repo/types';
 
 function generateId(): string {
   return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
 }
+
+type AgentInfoPayload = {
+  device_id: string;
+  event: string;
+  info: {
+    hostname: string;
+    version: {
+      version: string;
+      versionTs: number;
+    };
+  };
+};
 export class IoTMonitoringController {
+  private db = DatabaseService.getInstance();
+  
   /**
    * Controller methods for iotmonitoring feature
    */
@@ -34,14 +49,20 @@ export class IoTMonitoringController {
 
   /**
    * refreshDeviceStatus   */
-  async refreshDeviceStatus(): Promise<IoTDevice> {
+  async refreshDeviceStatus(deviceId: string): Promise<IoTDevice | null> {
     try {
-      // TODO: Implement refreshDeviceStatus      // This method should:
-      // 1. Validate input parameters
-      // 2. Call appropriate services
-      // 3. Transform and return data
-      
-      throw new Error('Not implemented');
+      const agentInfo = await this.db.agentInfo.findUnique({
+        where: { deviceId },
+      });
+
+      if (!agentInfo) {
+        return null;
+      }
+
+      // Convert BigInt to Number for JSON serialization
+      return {
+        ...agentInfo
+      };
     } catch (error) {
       console.error('Error in refreshDeviceStatus:', error);
       throw error;
@@ -69,4 +90,33 @@ export class IoTMonitoringController {
       throw { ok: false };
     }
   }
+
+  /**
+   * Save Agent Info
+   */
+  async saveAgentInfo(
+    deviceId: string,
+    info: AgentInfoPayload
+  ) {
+    // Extract versionTimestamp and convert to BigInt if present
+    let versionTimestamp = null;
+    if (info?.info?.version?.versionTs) {
+      versionTimestamp = BigInt(info.info.version.versionTs);
+    }
+
+    const agentInfo = await this.db.agentInfo.upsert({
+      where: { deviceId },
+      update: {
+        info,
+        versionTimestamp,
+      },
+      create: {
+        deviceId,
+        info,
+        versionTimestamp,
+      },
+    });
+
+    return agentInfo;
+  };
 }

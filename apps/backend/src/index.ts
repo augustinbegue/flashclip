@@ -12,7 +12,7 @@ const start = async () => {
     console.log('Démarrage du broker MQTT...');
     await mqttService.start();
 
-    console.log('MQTT Broker listening on mqtt://localhost:1883');
+    console.log('MQTT Broker listening on mqtt://0.0.0.0:1883');
   } catch (err) {
     // Arrêter le broker MQTT en cas d'erreur
     try {
