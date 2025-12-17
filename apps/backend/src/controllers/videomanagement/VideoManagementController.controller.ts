@@ -194,18 +194,18 @@ export class VideoManagementController {
     };
 
     for (const variant of AI_VARIANTS) {
-      const key = variant.replace(".mp4", "") as keyof AIVideos;
+      const key = variant.replace(".mp4", "");
       if (existing.size === 0 || existing.has(variant)) {
         try {
-          if (key === "subtitles") {
-            results[key] = await storage.getUrl(
+          if (key === "subtitled") {
+            results["subtitles"] = await storage.getUrl(
               `${folder}subtitled.mp4`,
             );
           } else {
-            results[key] = await storage.getUrl(`${folder}${variant}`);
+            results[key as keyof AIVideos] = await storage.getUrl(`${folder}${variant}`);
           }
         } catch (error) {
-          results[key] = "";
+          results[key as keyof AIVideos] = "";
         }
       }
     }
