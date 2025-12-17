@@ -26,6 +26,6 @@ spec:
       priority: 1
       services:
         - name: flashclip-frontend
-          port: 80
+          port: http
   tls:
     certResolver: letsencrypt
