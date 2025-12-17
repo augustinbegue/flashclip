@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/augustinbegue/flashclip-frontend:latest          
+          image: mzzay/iot-dashboard:1.1
           imagePullPolicy: Always
           ports:
             - name: http
