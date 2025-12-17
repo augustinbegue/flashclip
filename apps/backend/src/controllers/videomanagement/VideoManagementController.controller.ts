@@ -11,7 +11,7 @@ import type { AIVideos, Video, VideoResponse } from '@repo/types';
 
 const RAW_VIDEO_ROOT = "upload/demo-rpi/";
 const AI_VIDEO_ROOT = "videos/demo-rpi/";
-const AI_VARIANTS = ["emoji.mp4", "engaging.mp4", "subtitles.mp4"] as const;
+const AI_VARIANTS = ["emoji.mp4", "engaging.mp4", "subtitled.mp4"] as const;
 
 export class VideoManagementController {
   /**
