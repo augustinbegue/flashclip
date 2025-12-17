@@ -37,6 +37,9 @@ COPY --from=builder /app/tsconfig.json ./
 # Create tmp directory for video processing
 RUN mkdir -p /app/tmp
 
+# Allow all on data and tmp directories
+RUN chmod -R 777 /app/data /app/tmp
+
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=3000

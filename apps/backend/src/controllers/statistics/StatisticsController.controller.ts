@@ -5,24 +5,69 @@
  */
 
 // Domain types from spec
+import { AIJobStatus } from '@/generated/prisma';
+import { DatabaseService, StorageService } from '@/services';
 import type { Statistic, StorageInfo } from '@repo/types';
 
-
 export class StatisticsController {
+  private db = DatabaseService.getInstance();
+  private storageService = StorageService.getInstance();
+  
   /**
    * Controller methods for statistics feature
    */
 
   /**
    * getDashboardStats   */
-  async getDashboardStats(): Promise<Statistic> {
+  async getDashboardStats(): Promise<any> {
     try {
-      // TODO: Implement getDashboardStats      // This method should:
-      // 1. Validate input parameters
-      // 2. Call appropriate services
-      // 3. Transform and return data
+      // Get total videos count
+      const totalVideos = await this.db.video.count();
+
+      // Get total AI jobs count
+      const totalAIJobs = await this.db.aIJob.count();
+
+      // Get storage info
+      const storageInfo = await this.storageService.getStorageInfo();
+
+      // Get videos by status (for now, all videos are "ready")
+      const videosByStatus = {
+        ready: totalVideos,
+        processing: 0,
+        failed: 0
+      };
+
+      // Get AI jobs by status
+      const aiJobs = await this.db.aIJob.findMany();
       
-      throw new Error('Not implemented');
+      const aiJobsByStatus: Record<AIJobStatus, number> = {
+        COMPLETED: 0,
+        PROCESSING: 0,
+        PENDING: 0,
+        FAILED: 0
+      };
+
+      aiJobs.forEach(job => {
+        const status = job.status;
+        if (status in aiJobsByStatus) {
+          aiJobsByStatus[status]++;
+        }
+      });
+
+      return {
+        totalVideos,
+        totalAIJobs,
+        totalDevices: 1,
+        storageUsed: storageInfo.used,
+        storageLimit: storageInfo.limit,
+        videosByStatus,
+        aiJobsByStatus: {
+          completed: aiJobsByStatus.COMPLETED,
+          processing: aiJobsByStatus.PROCESSING,
+          pending: aiJobsByStatus.PENDING,
+          failed: aiJobsByStatus.FAILED
+        }
+      };
     } catch (error) {
       console.error('Error in getDashboardStats:', error);
       throw error;

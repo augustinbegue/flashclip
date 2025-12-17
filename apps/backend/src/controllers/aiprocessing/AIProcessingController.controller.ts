@@ -150,6 +150,14 @@ export class AIProcessingController {
         },
       });
 
+      await this.db.aIJob.update({
+        where: { id: params.jobId },
+        data: {
+          status: jobStatus.data.status,
+          progress: jobStatus.data.progress,
+        },
+      });
+
       if (!aiJob) {
         throw new Error('Job not found');
       }
