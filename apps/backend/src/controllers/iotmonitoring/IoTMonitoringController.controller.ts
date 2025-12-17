@@ -13,14 +13,19 @@ function generateId(): string {
   return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
 }
 
+export interface AgentInfoStatus extends IoTDevice {
+  versionTimestamp: number;
+}
+
 type AgentInfoPayload = {
   device_id: string;
   event: string;
-  info: {
-    hostname: string;
-    version: {
-      version: string;
-      versionTs: number;
+  timestamp?: number;
+  info?: {
+    hostname?: string;
+    version?: {
+      version?: string;
+      versionTs?: number;
     };
   };
 };
@@ -49,7 +54,7 @@ export class IoTMonitoringController {
 
   /**
    * refreshDeviceStatus   */
-  async refreshDeviceStatus(deviceId: string): Promise<IoTDevice | null> {
+  async refreshDeviceStatus(deviceId: string): Promise<AgentInfoStatus | null> {
     try {
       const agentInfo = await this.db.agentInfo.findUnique({
         where: { deviceId },
@@ -61,7 +66,8 @@ export class IoTMonitoringController {
 
       // Convert BigInt to Number for JSON serialization
       return {
-        ...agentInfo
+        ...agentInfo,
+        versionTimestamp: Number(agentInfo.versionTimestamp)
       };
     } catch (error) {
       console.error('Error in refreshDeviceStatus:', error);
@@ -98,21 +104,38 @@ export class IoTMonitoringController {
     deviceId: string,
     info: AgentInfoPayload
   ) {
+    // Use timestamp from payload or current time
+    const timestamp = info.timestamp || Date.now();
+    
     // Extract versionTimestamp and convert to BigInt if present
-    let versionTimestamp = null;
+    let versionTimestamp: bigint = BigInt(timestamp);
     if (info?.info?.version?.versionTs) {
       versionTimestamp = BigInt(info.info.version.versionTs);
     }
 
+    // Build info object with defaults
+    const infoData = {
+      device_id: info.device_id,
+      event: info.event,
+      timestamp,
+      info: {
+        hostname: info.info?.hostname || 'unknown',
+        version: {
+          version: info.info?.version?.version || '0.0.0',
+          versionTs: info.info?.version?.versionTs || timestamp,
+        },
+      },
+    };
+
     const agentInfo = await this.db.agentInfo.upsert({
       where: { deviceId },
       update: {
-        info,
+        info: infoData,
         versionTimestamp,
       },
       create: {
         deviceId,
-        info,
+        info: infoData,
         versionTimestamp,
       },
     });

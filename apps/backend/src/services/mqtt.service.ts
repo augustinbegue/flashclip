@@ -37,16 +37,26 @@ export class MqttService {
         if (err) return reject(err);
         this.isRunning = true;
         // create internal client to publish
-        this.client = connect(`mqtt://0.0.0.0:${this.port}`, {
+        this.client = connect(`mqtt://localhost:${this.port}`, {
           clientId: this.clientId,
           clean: true,
         });
 
         this.client.on('connect', () => {
           console.log('[MQTT] internal client connected');
+          
+          // Subscribe to all flashclip topics
+          this.client!.subscribe('flashclip/#', { qos: 1 }, (err) => {
+            if (err) {
+              console.error('[MQTT] Failed to subscribe to flashclip/#:', err);
+            } else {
+              console.log('[MQTT] Subscribed to flashclip/#');
+            }
+          });
         });
 
         this.client.on('message', (topic, message) => {
+          console.log(`[MQTT] Message received on topic ${topic}: ${message.toString()}`);
           if (topic.endsWith('/info')) {
             // save info to database
             const deviceName = topic.split('/')[1];
@@ -65,6 +75,18 @@ export class MqttService {
         this.client.on('error', (e) =>
           console.error('[MQTT] internal client error', e)
         );
+
+        // Add broker-level logging
+        this.aedes.on('publish', (packet, client) => {
+          if (client) {
+            console.log(`[MQTT Broker] Message published by ${client.id} on topic ${packet.topic}`);
+          }
+        });
+
+        this.aedes.on('subscribe', (subscriptions, client) => {
+          console.log(`[MQTT Broker] Client ${client.id} subscribed to: ${subscriptions.map(s => s.topic).join(', ')}`);
+        });
+
         resolve();
       });
     });
