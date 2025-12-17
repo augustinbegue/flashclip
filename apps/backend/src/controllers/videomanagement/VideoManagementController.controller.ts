@@ -197,7 +197,13 @@ export class VideoManagementController {
       const key = variant.replace(".mp4", "") as keyof AIVideos;
       if (existing.size === 0 || existing.has(variant)) {
         try {
-          results[key] = await storage.getUrl(`${folder}${variant}`);
+          if (key === "subtitles") {
+            results[key] = await storage.getUrl(
+              `${folder}subtitled.mp4`,
+            );
+          } else {
+            results[key] = await storage.getUrl(`${folder}${variant}`);
+          }
         } catch (error) {
           results[key] = "";
         }
