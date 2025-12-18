@@ -171,7 +171,7 @@ export class VideoManagementController {
     });
   }
 
-  private async buildAIResults(videoId: string): Promise<AIVideos> {
+  private async buildAIResults(videoId: string): Promise<AIVideos | undefined> {
     const folder = `${AI_VIDEO_ROOT}${videoId}/`;
     let existing = new Set<string>();
 
@@ -184,6 +184,7 @@ export class VideoManagementController {
       );
     } catch (error) {
       console.warn("Could not list AI results for video", videoId, error);
+      return;
     }
 
     const results: AIVideos = {
