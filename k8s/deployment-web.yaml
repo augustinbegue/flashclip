@@ -25,11 +25,11 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/augustinbegue/flashclip-frontend:latest
+          image: ghcr.io/augustinbegue/flashclip-frontend:latest          
           imagePullPolicy: Always
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 80
               protocol: TCP
       securityContext:
         runAsNonRoot: false

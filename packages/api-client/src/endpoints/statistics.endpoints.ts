@@ -32,4 +32,9 @@ export class StatisticsEndpoints {
    * GET /statistics/getuserstorage   */
   async getUserStorage(): Promise<any> {
     return this.client.get(`/statistics/getuserstorage`);  }
+                                                                              
+  /**
+   * GET /statistics/getdashboardstats-aggregatestats   */
+  async getDashboardStats,AggregateStats(): Promise<any> {
+    return this.client.get(`/statistics/getdashboardstats-aggregatestats`);  }
             }

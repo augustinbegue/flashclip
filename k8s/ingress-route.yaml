@@ -8,7 +8,7 @@ metadata:
   name: flashclip
   namespace: flashclip
   labels:
-    app: flashclip
+    app: flashclip    
 spec:
   entryPoints:
     - websecure
@@ -26,6 +26,6 @@ spec:
       priority: 1
       services:
         - name: flashclip-frontend
-          port: http
+          port: 80
   tls:
     certResolver: letsencrypt

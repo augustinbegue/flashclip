@@ -8,16 +8,12 @@ kind: Kustomization
 namespace: flashclip
 resources:
   - pvc.yaml
-  - pvc-processing.yaml
-  # - secret-processing.yaml
   - deployment.yaml
-  - deployment-processing.yaml
-  - deployment-web.yaml
   - service.yaml
-  - service-processing.yaml
+  - deployment-web.yaml
   - service-web.yaml
   - ingress-route.yaml
 
 commonLabels:
-  app.kubernetes.io/name: flashclip
+  app.kubernetes.io/name: flashclip  
   app.kubernetes.io/managed-by: agl-cli
