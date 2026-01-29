@@ -4,7 +4,7 @@
 # ============================================================================
 
 # Stage 1: Install dependencies
-FROM oven/bun:1-slim AS deps
+FROM oven/bun:1-alpine AS deps
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY apps/backend/package.json ./apps/backend/
 RUN bun install
 
 # Stage 2: Build
-FROM oven/bun:1-slim AS builder
+FROM oven/bun:1-alpine AS builder
 
 WORKDIR /app
 
@@ -34,13 +34,12 @@ ENV DATABASE_URL="file:/data/app.db"
 RUN cd apps/backend && bunx prisma generate
 
 # Stage 3: Production
-FROM oven/bun:1-slim AS runner
+FROM oven/bun:1-alpine AS runner
 
 WORKDIR /app/apps/backend
-
 # Create non-root user for security
-RUN groupadd --system nodejs && \
-  useradd --system --uid 1001 --gid nodejs hono
+RUN addgroup --system --gid 1001 nodejs && \
+  adduser --system --uid 1001 hono
 
 # Copy built application
 COPY --from=builder --chown=hono:nodejs /app/packages /app/packages
@@ -58,13 +57,13 @@ ENV DATABASE_URL="file:/data/app.db"
 
 # Expose port
 EXPOSE 3000
-
 # Switch to non-root user
 USER hono
+
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
 
 # Start the application
-CMD ["bun", "run", "start"]
+CMD ["bun", "run", "src/index.ts"]

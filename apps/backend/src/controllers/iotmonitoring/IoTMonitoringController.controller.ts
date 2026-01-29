@@ -5,33 +5,10 @@
  */
 
 // Domain types from spec
-import { DatabaseService } from '@/services/database.service';
-import { mqttService } from '@/services/mqtt.service';
-import type { IoTDevice } from '@repo/types';
+import type { DeviceStatus, IoTDevice } from '@repo/types';
 
-function generateId(): string {
-  return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
-}
 
-export interface AgentInfoStatus extends IoTDevice {
-  versionTimestamp: number;
-}
-
-type AgentInfoPayload = {
-  device_id: string;
-  event: string;
-  timestamp?: number;
-  info?: {
-    hostname?: string;
-    version?: {
-      version?: string;
-      versionTs?: number;
-    };
-  };
-};
 export class IoTMonitoringController {
-  private db = DatabaseService.getInstance();
-  
   /**
    * Controller methods for iotmonitoring feature
    */
@@ -54,21 +31,14 @@ export class IoTMonitoringController {
 
   /**
    * refreshDeviceStatus   */
-  async refreshDeviceStatus(deviceId: string): Promise<AgentInfoStatus | null> {
+  async refreshDeviceStatus(): Promise<IoTDevice> {
     try {
-      const agentInfo = await this.db.agentInfo.findUnique({
-        where: { deviceId },
-      });
-
-      if (!agentInfo) {
-        return null;
-      }
-
-      // Convert BigInt to Number for JSON serialization
-      return {
-        ...agentInfo,
-        versionTimestamp: Number(agentInfo.versionTimestamp)
-      };
+      // TODO: Implement refreshDeviceStatus      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
       console.error('Error in refreshDeviceStatus:', error);
       throw error;
@@ -76,70 +46,19 @@ export class IoTMonitoringController {
   }
 
   /**
-   * Start record remotly
-   */
-  async startRecord(deviceId: string): Promise<{ ok : boolean; id?: string }> {
+   * listDevices,RefreshDeviceStatus   */
+  async listDevices,RefreshDeviceStatus(): Promise<IoTDevice,DeviceStatus> {
     try {
-      const id = generateId();
-      const payload = {
-        type: 'start_record',
-        data: {},
-        id,
-      };
-      await mqttService.publish(`flashclip/${deviceId}/commands`, payload, {
-        qos: 1,
-      });
-
-      return { ok: true, id };
+      // TODO: Implement listDevices,RefreshDeviceStatus      // This method should:
+      // 1. Validate input parameters
+      // 2. Call appropriate services
+      // 3. Transform and return data
+      
+      throw new Error('Not implemented');
     } catch (error) {
-      console.error('Error in startRecord:', error);
-      throw { ok: false };
+      console.error('Error in listDevices,RefreshDeviceStatus:', error);
+      throw error;
     }
   }
 
-  /**
-   * Save Agent Info
-   */
-  async saveAgentInfo(
-    deviceId: string,
-    info: AgentInfoPayload
-  ) {
-    // Use timestamp from payload or current time
-    const timestamp = info.timestamp || Date.now();
-    
-    // Extract versionTimestamp and convert to BigInt if present
-    let versionTimestamp: bigint = BigInt(timestamp);
-    if (info?.info?.version?.versionTs) {
-      versionTimestamp = BigInt(info.info.version.versionTs);
-    }
-
-    // Build info object with defaults
-    const infoData = {
-      device_id: info.device_id,
-      event: info.event,
-      timestamp,
-      info: {
-        hostname: info.info?.hostname || 'unknown',
-        version: {
-          version: info.info?.version?.version || '0.0.0',
-          versionTs: info.info?.version?.versionTs || timestamp,
-        },
-      },
-    };
-
-    const agentInfo = await this.db.agentInfo.upsert({
-      where: { deviceId },
-      update: {
-        info: infoData,
-        versionTimestamp,
-      },
-      create: {
-        deviceId,
-        info: infoData,
-        versionTimestamp,
-      },
-    });
-
-    return agentInfo;
-  };
 }

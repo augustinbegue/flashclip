@@ -10,7 +10,7 @@ const controller = new IoTMonitoringController();
 // Validation Schemas
 // ============================================================================
 
-// --- GET /iotmonitoring/refreshdevicestatus ---
+// --- GET /iotmonitoring/listdevices-refreshdevicestatus ---
 
 // ============================================================================
 // Route Handlers
@@ -23,12 +23,12 @@ router.get(
 
 
       // Call controller method
-      const result = await controller.refreshDeviceStatus();
+      const result = await controller.listDevices,RefreshDeviceStatus();
 
       // Return response
       return c.json(result);
     } catch (error) {
-      console.error('Error in /iotmonitoring/refreshdevicestatus GET:', error);
+      console.error('Error in /iotmonitoring/listdevices-refreshdevicestatus GET:', error);
       return c.json(
         { error: error instanceof Error ? error.message : 'Internal server error' },
         500
