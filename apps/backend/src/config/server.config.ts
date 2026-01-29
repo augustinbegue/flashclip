@@ -13,11 +13,14 @@ export function createApp() {
 
   // Middleware
   app.use(logger());
-  app.use(cors({
-    origin: '*',
-    allowMethods: ['*'],
-    allowHeaders: ['*'],
-  }));
+  app.use(
+    cors({
+      origin: ["http://localhost:5173"],
+      allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+    })
+  );
   app.use(prettyJSON());
 
   // Health check

@@ -7,7 +7,7 @@ export default function HomePage() {
         <h1 className="text-5xl font-bold text-gray-900 mb-4">
           Flashclip        </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Welcome to your application        </p>
+          Vue d'ensemble        </p>
         <div className="flex gap-4 justify-center">
           <Link
             to="/videos"

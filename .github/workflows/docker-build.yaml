@@ -88,44 +88,7 @@ jobs:
           tags: ${{ steps.build-meta.outputs.tags }}
           labels: ${{ steps.build-meta.outputs.labels }}
           build-args: |
-            VITE_API_URL=flashclip.cloud/api
+            VITE_API_URL=flashclip.server.begue.cc/api
     outputs:
       image: ${{ steps.build-meta.outputs.tags }}
 
-  build-processing:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-      attestations: write
-      id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: build-meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/augustinbegue/flashclip-processing
-          tags: |
-            type=sha
-            type=raw,value=latest
-
-      - name: Build and push processing image
-        uses: docker/build-push-action@v6
-        with:
-          context: apps/processing
-          file: apps/processing/Dockerfile
-          push: true
-          tags: ${{ steps.build-meta.outputs.tags }}
-          labels: ${{ steps.build-meta.outputs.labels }}
-    outputs:
-      image: ${{ steps.build-meta.outputs.tags }}

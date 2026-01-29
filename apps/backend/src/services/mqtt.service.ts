@@ -8,7 +8,6 @@
 import Aedes from 'aedes';
 import { createServer, Server } from 'net';
 import { connect, MqttClient } from 'mqtt';
-import { IoTMonitoringController } from '@/controllers';
 
 /**
  * Minimal MQTT service: start/stop broker, publish messages and perform
@@ -21,7 +20,6 @@ export class MqttService {
   private port: number;
   private isRunning: boolean = false;
   private clientId: string;
-  private iotMonitoring : IoTMonitoringController = new IoTMonitoringController();
 
   constructor(port: number = 1883, clientId: string = 'flashclip-backend-internal') {
     this.port = port;
@@ -37,56 +35,18 @@ export class MqttService {
         if (err) return reject(err);
         this.isRunning = true;
         // create internal client to publish
-        this.client = connect(`mqtt://localhost:${this.port}`, {
+        this.client = connect(`mqtt://0.0.0.0:${this.port}`, {
           clientId: this.clientId,
           clean: true,
         });
 
         this.client.on('connect', () => {
           console.log('[MQTT] internal client connected');
-          
-          // Subscribe to all flashclip topics
-          this.client!.subscribe('flashclip/#', { qos: 1 }, (err) => {
-            if (err) {
-              console.error('[MQTT] Failed to subscribe to flashclip/#:', err);
-            } else {
-              console.log('[MQTT] Subscribed to flashclip/#');
-            }
-          });
-        });
-
-        this.client.on('message', (topic, message) => {
-          console.log(`[MQTT] Message received on topic ${topic}: ${message.toString()}`);
-          if (topic.endsWith('/info')) {
-            // save info to database
-            const deviceName = topic.split('/')[1];
-            const info = message.toString();
-            console.log(`[MQTT] Info from device ${deviceName}: ${info}`);
-
-            this.iotMonitoring.saveAgentInfo(deviceName, JSON.parse(info)).catch((e) => {
-              console.error(
-                `[MQTT] Failed to save agent info for device ${deviceName}:`,
-                e
-              );
-            });
-          }
         });
 
         this.client.on('error', (e) =>
           console.error('[MQTT] internal client error', e)
         );
-
-        // Add broker-level logging
-        this.aedes.on('publish', (packet, client) => {
-          if (client) {
-            console.log(`[MQTT Broker] Message published by ${client.id} on topic ${packet.topic}`);
-          }
-        });
-
-        this.aedes.on('subscribe', (subscriptions, client) => {
-          console.log(`[MQTT Broker] Client ${client.id} subscribed to: ${subscriptions.map(s => s.topic).join(', ')}`);
-        });
-
         resolve();
       });
     });

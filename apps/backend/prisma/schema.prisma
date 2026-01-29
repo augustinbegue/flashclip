@@ -12,13 +12,6 @@ generator client {
 }
 
 // ========== ENUMS ==========
-enum AIJobStatus {
-  PENDING
-  PROCESSING
-  COMPLETED
-  FAILED
-}
-
 // ========== MODELS ==========
 model Video {
   id String @id @default(uuid())
@@ -37,22 +30,11 @@ model Video {
 model AIJob {
   id String @id @default(uuid())
 
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  progress  Int         @default(0)
-  status    AIJobStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations from object refs (this model is the "one" side or direct reference)
   video Video @relation(fields: [videoId], references: [id])
 
   videoId String
-}
-
-model AgentInfo {
-  id               String   @id @default(cuid())
-  deviceId         String   @unique
-  info             Json
-  versionTimestamp BigInt?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
 }

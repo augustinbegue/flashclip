@@ -13,7 +13,7 @@ export class DatabaseService {
   private prisma: PrismaClient;
 
   private constructor() {
-    const adapter = new PrismaLibSql({
+        const adapter = new PrismaLibSql({
       url: process.env.DB_PATH || 'file:./dev.db',
     });
     
@@ -47,13 +47,6 @@ export class DatabaseService {
    */
   get aIJob() {
     return this.prisma.aIJob;
-  }
-
-  /**
-   * get AgentInfo
-   */
-  get agentInfo() {
-    return this.prisma.agentInfo;
   }
 
   /**

@@ -17,4 +17,9 @@ export class IotmonitoringEndpoints {
    * GET /iotmonitoring/refreshdevicestatus   */
   async refreshDeviceStatus(): Promise<any> {
     return this.client.get(`/iotmonitoring/refreshdevicestatus`);  }
+                                                                              
+  /**
+   * GET /iotmonitoring/listdevices-refreshdevicestatus   */
+  async listDevices,RefreshDeviceStatus(): Promise<any> {
+    return this.client.get(`/iotmonitoring/listdevices-refreshdevicestatus`);  }
             }

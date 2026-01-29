@@ -47,4 +47,3 @@ coverage/
 
 # Prisma
 generated
-k8s/secret-processing.yaml

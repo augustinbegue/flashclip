@@ -22,4 +22,14 @@ export class VideomanagementEndpoints {
    * GET /videomanagement/getvideodetails   */
   async getVideoDetails(): Promise<any> {
     return this.client.get(`/videomanagement/getvideodetails`);  }
+                                                                              
+  /**
+   * GET /videomanagement/listvideos-filtervideos   */
+  async listVideos,FilterVideos(): Promise<any> {
+    return this.client.get(`/videomanagement/listvideos-filtervideos`);  }
+                                                                              
+  /**
+   * GET /videomanagement/getvideodetails-getairesults   */
+  async getVideoDetails,GetAIResults(): Promise<any> {
+    return this.client.get(`/videomanagement/getvideodetails-getairesults`);  }
             }

@@ -44,7 +44,7 @@ interface ProcessVideoResponse {
   };
 }
 
-export interface JobStatusResponse {
+interface JobStatusResponse {
   success: boolean;
   data: {
     jobId: string;

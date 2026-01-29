@@ -124,7 +124,7 @@ export class CustomAdapter {
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => response.statusText);
-      throw new Error(`List failed (${response.status})`);
+      throw new Error(`List failed (${response.status}): ${errorText}`);
     }
 
     const payload = await this.parseJsonSafe(response);
